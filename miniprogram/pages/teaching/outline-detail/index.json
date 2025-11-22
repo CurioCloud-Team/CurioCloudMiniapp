@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "教学大纲",
+  "usingComponents": {
+    "section-header": "/components/section-header/index"
+  }
+}

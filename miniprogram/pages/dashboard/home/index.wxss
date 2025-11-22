@@ -1,0 +1,55 @@
+.dashboard {
+  padding: 32rpx;
+}
+
+.stats {
+  display: flex;
+  gap: 24rpx;
+}
+
+.stat-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 16rpx 32rpx rgba(15, 23, 42, 0.08);
+}
+
+.stat-value {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.stat-label {
+  color: #94a3b8;
+}
+
+.lesson-card {
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: #fff;
+  margin-bottom: 16rpx;
+  box-shadow: 0 12rpx 24rpx rgba(15, 23, 42, 0.05);
+}
+
+.lesson-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.lesson-meta {
+  color: #64748b;
+  margin-top: 8rpx;
+}
+
+.lesson-date {
+  color: #94a3b8;
+  font-size: 24rpx;
+  margin-top: 4rpx;
+}
+
+.empty {
+  color: #94a3b8;
+  padding: 24rpx 0;
+  text-align: center;
+}

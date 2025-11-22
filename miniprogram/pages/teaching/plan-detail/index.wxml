@@ -1,0 +1,25 @@
+<view class="page">
+  <view class="section">
+    <section-header title="{{plan.title}}" description="{{plan.subject}} · {{plan.grade}}"></section-header>
+    <view class="objective">
+      <text class="label">教学目标</text>
+      <text>{{plan.teaching_objective}}</text>
+    </view>
+    <view class="outline">
+      <text class="label">教学大纲</text>
+      <view wx:for="{{outlineParagraphs}}" wx:key="index" class="outline-item">{{item}}</view>
+    </view>
+    <view class="activities">
+      <text class="label">教学活动</text>
+      <view wx:for="{{plan.activities}}" wx:key="index" class="activity">
+        <view class="activity-title">{{item.activity_name}} · {{item.duration}} 分钟</view>
+        <view class="activity-desc">{{item.description}}</view>
+      </view>
+    </view>
+    <view class="actions">
+      <button class="primary" bindtap="generatePPT">生成 PPT</button>
+      <button class="ghost" bindtap="openExercises">习题助手</button>
+      <button class="ghost" bindtap="editPlan">编辑</button>
+    </view>
+  </view>
+</view>

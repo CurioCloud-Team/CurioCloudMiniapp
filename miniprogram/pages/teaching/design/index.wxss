@@ -1,0 +1,49 @@
+.page {
+  padding: 32rpx;
+}
+
+.inline-actions button + button {
+  margin-left: 16rpx;
+}
+
+.filter-row {
+  display: flex;
+  gap: 16rpx;
+  margin: 24rpx 0;
+}
+
+.filter-chip {
+  background: #e0f2fe;
+  padding: 16rpx 24rpx;
+  border-radius: 999rpx;
+  color: #0369a1;
+}
+
+.plan-card {
+  margin-bottom: 20rpx;
+  padding: 24rpx;
+  border-radius: 24rpx;
+  background: #fff;
+  box-shadow: 0 12rpx 24rpx rgba(15, 23, 42, 0.05);
+}
+
+.plan-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.plan-meta {
+  color: #94a3b8;
+  margin: 8rpx 0 20rpx;
+}
+
+.plan-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.empty {
+  text-align: center;
+  padding: 32rpx 0;
+  color: #94a3b8;
+}

@@ -1,0 +1,7 @@
+<view class="page" wx:if="{{slides.length}}">
+  <view class="slide" wx:for="{{slides}}" wx:key="index">
+    <view class="slide-title">第 {{index + 1}} 页 · {{item.title || '未命名'}} </view>
+    <view class="slide-content">{{item.content || item.notes || '暂无内容'}}</view>
+  </view>
+</view>
+<view wx:else class="empty">正在加载 PPT 内容...</view>

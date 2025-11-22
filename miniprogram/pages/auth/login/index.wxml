@@ -1,0 +1,27 @@
+<view class="auth-page">
+  <view class="hero">
+    <text class="brand">CurioCloud</text>
+    <text class="subtitle">AI 驱动的智慧备课助手</text>
+  </view>
+
+  <view class="form-card">
+    <view class="form-title">欢迎回来</view>
+    <view class="form-description">请使用账号密码登录系统</view>
+
+    <view class="form-field">
+      <text class="label">用户名</text>
+      <input class="input" placeholder="输入用户名" value="{{username}}" data-field="username" bindinput="onInput" />
+    </view>
+
+    <view class="form-field">
+      <text class="label">密码</text>
+      <input class="input" password placeholder="输入密码" value="{{password}}" data-field="password" bindinput="onInput" />
+    </view>
+
+    <view class="actions">
+      <button class="primary" bindtap="handleLogin" loading="{{loading}}">登录</button>
+      <button class="ghost" bindtap="gotoRegister">注册新账号</button>
+      <button class="link" bindtap="gotoForgot">忘记密码？</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "学情分析",
+  "usingComponents": {
+    "section-header": "/components/section-header/index"
+  }
+}

@@ -1,0 +1,5 @@
+@import "../login/index.wxss";
+
+.form-field {
+  margin-bottom: 28rpx;
+}

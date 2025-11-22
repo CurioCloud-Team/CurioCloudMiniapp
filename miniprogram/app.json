@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/auth/login/index",
+    "pages/auth/register/index",
+    "pages/auth/forgot-password/index",
+    "pages/dashboard/home/index",
+    "pages/teaching/design/index",
+    "pages/teaching/outline-detail/index",
+    "pages/teaching/conversation/index",
+    "pages/teaching/plan-editor/index",
+    "pages/teaching/plan-detail/index",
+    "pages/ppt/status/index",
+    "pages/ppt/viewer/index",
+    "pages/exercise/assistant/index",
+    "pages/exercise/result/index",
+    "pages/analysis/entry/index",
+    "pages/analysis/result/index",
+    "pages/analysis/saved-reports/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "CurioCloud",
+    "navigationBarBackgroundColor": "#1f2937",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f5f5"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于个性化教学资源推荐"
+    }
+  }
+}

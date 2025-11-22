@@ -1,0 +1,14 @@
+<view class="page">
+  <view class="section" wx:if="{{questions.length}}">
+    <view class="question" wx:for="{{questions}}" wx:key="id">
+      <view class="question-title">Q{{index + 1}} {{item.content}}</view>
+      <view class="question-meta">难度：{{item.difficulty}}</view>
+      <view wx:if="{{item.choices && item.choices.length}}" class="choices">
+        <view wx:for="{{item.choices}}" wx:for-item="choice" wx:key="id" class="choice">{{choice.label}}. {{choice.content}}</view>
+      </view>
+      <view wx:if="{{item.answer}}" class="answer">答案：{{item.answer}}</view>
+    </view>
+    <button class="primary" bindtap="backToAssistant">继续生成</button>
+  </view>
+  <view wx:else class="empty">暂无数据，请先生成习题。</view>
+</view>

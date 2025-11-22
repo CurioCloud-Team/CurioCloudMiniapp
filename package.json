@@ -1,0 +1,14 @@
+{
+  "name": "curiocloud-weapp",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -p tsconfig.json -w",
+    "lint": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+  "miniprogram-api-typings": "^4.1.0",
+    "typescript": "^5.8.3"
+  }
+}

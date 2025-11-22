@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="section">
+    <section-header title="AI 备课助手" description="根据提示回答问题，生成专属教案"></section-header>
+    <scroll-view scroll-y style="height: 60vh" class="chat-box">
+      <view wx:for="{{messages}}" wx:key="index" class="message {{item.type}}">
+        {{item.content}}
+      </view>
+    </scroll-view>
+
+    <view wx:if="{{questionCard}}" class="question-card">
+      <view class="question-title">{{questionCard.question}}</view>
+      <view class="options" wx:if="{{questionCard.options.length}}">
+        <button wx:for="{{questionCard.options}}" wx:key="index" class="option" data-value="{{item}}" bindtap="chooseOption">{{item}}</button>
+      </view>
+      <textarea wx:if="{{questionCard.allows_free_text}}" class="answer-input" placeholder="补充说明" value="{{currentAnswer}}" bindinput="onAnswerInput"></textarea>
+      <button class="primary" bindtap="submitAnswer" loading="{{submitting}}">提交答案</button>
+    </view>
+
+    <view wx:else class="completed">
+      <text>所有问题已回答，生成的教案可在列表中查看。</text>
+      <button class="primary" bindtap="goLessonList">查看教案</button>
+    </view>
+  </view>
+</view>

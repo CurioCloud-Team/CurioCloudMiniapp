@@ -1,0 +1,16 @@
+<view class="auth-page">
+  <view class="hero">
+    <text class="brand">创建账户</text>
+    <text class="subtitle">加入 CurioCloud，开启智能备课</text>
+  </view>
+
+  <view class="form-card">
+    <view class="form-field" wx:for="{{fields}}" wx:key="field">
+      <text class="label">{{item.label}}</text>
+      <input class="input" placeholder="{{item.placeholder}}" data-field="{{item.field}}" value="{{form[item.field]}}" bindinput="onInput" password="{{item.password}}" />
+    </view>
+
+    <button class="primary" bindtap="handleSubmit" loading="{{loading}}">立即注册</button>
+    <button class="link" bindtap="gotoLogin">已有账号？前往登录</button>
+  </view>
+</view>

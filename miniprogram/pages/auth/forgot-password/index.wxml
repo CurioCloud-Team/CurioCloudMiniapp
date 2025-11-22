@@ -1,0 +1,16 @@
+<view class="auth-page">
+  <view class="hero">
+    <text class="brand">重置密码</text>
+    <text class="subtitle">输入注册邮箱接收验证码</text>
+  </view>
+
+  <view class="form-card">
+    <view class="form-field">
+      <text class="label">邮箱</text>
+      <input class="input" placeholder="请输入注册邮箱" value="{{email}}" bindinput="onInput" />
+    </view>
+
+    <button class="primary" bindtap="handleSubmit" loading="{{loading}}">发送重置邮件</button>
+    <button class="link" bindtap="goBack">返回登录</button>
+  </view>
+</view>

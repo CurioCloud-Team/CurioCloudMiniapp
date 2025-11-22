@@ -1,0 +1,10 @@
+<view class="page">
+  <view class="section">
+    <section-header title="{{lessonPlan.title}}" description="{{lessonPlan.subject}} · {{lessonPlan.grade}}"></section-header>
+    <view class="outline">
+      <view wx:for="{{outlineParagraphs}}" wx:key="index" class="outline-item">
+        {{item}}
+      </view>
+    </view>
+  </view>
+</view>

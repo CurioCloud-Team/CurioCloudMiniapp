@@ -1,0 +1,32 @@
+.page {
+  padding: 32rpx;
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  margin: 16rpx 0;
+}
+
+.outline-item,
+.activity {
+  background: #fff;
+  margin-bottom: 16rpx;
+  padding: 20rpx;
+  border-radius: 20rpx;
+}
+
+.activity-title {
+  font-weight: 600;
+}
+
+.activity-desc {
+  color: #64748b;
+  margin-top: 8rpx;
+}
+
+.actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 32rpx;
+}

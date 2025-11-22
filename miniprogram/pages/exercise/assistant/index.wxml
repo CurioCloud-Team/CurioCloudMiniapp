@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="section">
+    <section-header title="智能习题生成" description="选择教案与题型"><view /></section-header>
+    <view class="form-field">
+      <text class="label">关联教案</text>
+      <picker mode="selector" range="{{planTitles}}" value="{{planIndex}}" bindchange="onPlanChange">
+        <view class="picker">{{planTitles[planIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="form-field">
+      <text class="label">题型</text>
+      <picker mode="selector" range="{{questionTypes}}" value="{{typeIndex}}" bindchange="onTypeChange">
+        <view class="picker">{{questionTypes[typeIndex].label}}</view>
+      </picker>
+    </view>
+
+    <view class="form-field">
+      <text class="label">难度</text>
+      <picker mode="selector" range="{{difficulties}}" value="{{difficultyIndex}}" bindchange="onDifficultyChange">
+        <view class="picker">{{difficulties[difficultyIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="form-field">
+      <text class="label">题目数量: {{questionCount}}</text>
+      <slider min="3" max="20" step="1" value="{{questionCount}}" bindchange="onCountChange"></slider>
+    </view>
+
+    <button class="primary" bindtap="generate" loading="{{loading}}">生成习题</button>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "AI 备课助手",
+  "usingComponents": {
+    "section-header": "/components/section-header/index"
+  }
+}

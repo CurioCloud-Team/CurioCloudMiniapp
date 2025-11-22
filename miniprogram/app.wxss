@@ -1,0 +1,61 @@
+page {
+  background: #f5f6fb;
+  font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+  color: #111827;
+}
+
+.container {
+  padding: 24rpx 32rpx;
+}
+
+.section {
+  margin-bottom: 32rpx;
+  background: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 12rpx 24rpx rgba(15, 23, 42, 0.08);
+  padding: 32rpx;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  border-radius: 999rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.secondary-button {
+  border: 2rpx solid #94a3b8;
+  color: #334155;
+  border-radius: 999rpx;
+  padding: 22rpx 0;
+  text-align: center;
+}
+
+.text-muted {
+  color: #94a3b8;
+  font-size: 24rpx;
+}
+
+.badge {
+  padding: 8rpx 20rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  font-weight: 500;
+}
+
+.badge-success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #047857;
+}
+
+.badge-warning {
+  background: rgba(251, 191, 36, 0.18);
+  color: #92400e;
+}
+
+.badge-info {
+  background: rgba(59, 130, 246, 0.15);
+  color: #1d4ed8;
+}

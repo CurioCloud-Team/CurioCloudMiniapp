@@ -1,0 +1,24 @@
+.page {
+  padding: 32rpx;
+}
+
+.status-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  box-shadow: 0 16rpx 32rpx rgba(15, 23, 42, 0.08);
+}
+
+.title {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.status {
+  margin: 16rpx 0;
+  color: #475569;
+}
+
+button + button {
+  margin-top: 16rpx;
+}

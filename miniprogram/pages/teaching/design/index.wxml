@@ -1,0 +1,33 @@
+<view class="page">
+  <view class="section">
+    <section-header title="教学设计" description="管理与生成教案">
+      <view slot="actions" class="inline-actions">
+        <button size="mini" class="ghost" bindtap="openConversation">AI 备课</button>
+        <button size="mini" class="primary" bindtap="createPlan">新建教案</button>
+      </view>
+    </section-header>
+
+    <view class="filter-row">
+      <picker mode="selector" range="{{subjects}}" value="{{subjectIndex}}" bindchange="onSubjectChange">
+        <view class="filter-chip">{{subjects[subjectIndex]}}</view>
+      </picker>
+      <picker mode="selector" range="{{grades}}" value="{{gradeIndex}}" bindchange="onGradeChange">
+        <view class="filter-chip">{{grades[gradeIndex]}}</view>
+      </picker>
+    </view>
+
+    <view wx:for="{{filteredPlans}}" wx:key="id" class="plan-card">
+      <view class="plan-title">{{item.title}}</view>
+      <view class="plan-meta">{{item.subject}} · {{item.grade}}</view>
+      <view class="plan-actions">
+        <button size="mini" bindtap="viewDetail" data-id="{{item.id}}">详情</button>
+        <button size="mini" bindtap="generatePPT" data-id="{{item.id}}">生成PPT</button>
+        <button size="mini" type="warn" bindtap="deletePlan" data-id="{{item.id}}">删除</button>
+      </view>
+    </view>
+
+    <view wx:if="{{filteredPlans.length === 0}}" class="empty">
+      暂无符合筛选条件的教案
+    </view>
+  </view>
+</view>

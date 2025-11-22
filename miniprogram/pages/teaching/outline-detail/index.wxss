@@ -1,0 +1,11 @@
+.page {
+  padding: 32rpx;
+}
+
+.outline-item {
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  line-height: 1.6;
+}

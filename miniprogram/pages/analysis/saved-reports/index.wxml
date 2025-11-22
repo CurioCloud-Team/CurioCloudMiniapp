@@ -1,0 +1,20 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:elif="{{reports.length}}">
+    <block wx:for="{{reports}}" wx:key="id">
+      <view class="report-card" bindtap="openReport" data-id="{{item.id}}">
+        <view class="card-header">
+          <text class="title">{{item.title}}</text>
+          <text class="date">{{item.date}}</text>
+        </view>
+        <text class="meta">学生数量：{{item.student_count}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view wx:else class="empty">
+    <text>暂无历史报告</text>
+    <button class="primary" bindtap="backToEntry">返回上传</button>
+  </view>
+</view>

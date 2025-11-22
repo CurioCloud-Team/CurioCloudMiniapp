@@ -1,0 +1,10 @@
+<view class="feature-card" bindtap="onTap">
+  <view class="icon-container">
+    <slot name="icon"></slot>
+  </view>
+  <view class="content">
+    <view class="title">{{title}}</view>
+    <view class="description">{{description}}</view>
+  </view>
+  <view class="chevron">›</view>
+</view>

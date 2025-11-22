@@ -1,0 +1,37 @@
+<view class="dashboard">
+  <view class="welcome section">
+    <section-header title="你好，{{userProfile.full_name || userProfile.username}}" description="这里是你的智慧备课工作台"></section-header>
+    <view class="stats">
+      <view class="stat-card">
+        <text class="stat-value">{{metrics.lessonCount}}</text>
+        <text class="stat-label">教案</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{metrics.pptCount}}</text>
+        <text class="stat-label">PPT 项目</text>
+      </view>
+      <view class="stat-card">
+        <text class="stat-value">{{metrics.exerciseCount}}</text>
+        <text class="stat-label">习题集</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <section-header title="功能导航" description="选择模块快速开始"></section-header>
+    <feature-card title="教学设计" description="创建或查看教案" data-url="/pages/teaching/design/index" bindtap="navigateTo"></feature-card>
+    <feature-card title="备课对话" description="AI 引导式备课" data-url="/pages/teaching/conversation/index" bindtap="navigateTo"></feature-card>
+    <feature-card title="习题助手" description="生成针对性的练习" data-url="/pages/exercise/assistant/index" bindtap="navigateTo"></feature-card>
+    <feature-card title="学情分析" description="上传成绩，生成洞察" data-url="/pages/analysis/entry/index" bindtap="navigateTo"></feature-card>
+  </view>
+
+  <view class="section">
+    <section-header title="最近教案" description="最近更新的 3 个教案"></section-header>
+    <view wx:if="{{lessonPlans.length === 0}}" class="empty">暂无教案，快去创建吧～</view>
+    <view wx:for="{{lessonPlans}}" wx:key="id" class="lesson-card" bindtap="openLesson" data-id="{{item.id}}">
+      <view class="lesson-title">{{item.title}}</view>
+      <view class="lesson-meta">{{item.subject}} · {{item.grade}}</view>
+      <view class="lesson-date">{{item.created_at}}</view>
+    </view>
+  </view>
+</view>
