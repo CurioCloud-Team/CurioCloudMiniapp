@@ -30,3 +30,5 @@
     <button class="primary" bindtap="generate" loading="{{loading}}">生成习题</button>
   </view>
 </view>
+
+<bottom-tab-bar active="exercise"></bottom-tab-bar>

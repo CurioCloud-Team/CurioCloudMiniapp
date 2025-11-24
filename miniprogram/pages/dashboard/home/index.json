@@ -2,6 +2,7 @@
   "navigationBarTitleText": "CurioCloud",
   "usingComponents": {
     "section-header": "/components/section-header/index",
-    "feature-card": "/components/feature-card/index"
+    "feature-card": "/components/feature-card/index",
+    "bottom-tab-bar": "/components/bottom-tab-bar/index"
   }
 }

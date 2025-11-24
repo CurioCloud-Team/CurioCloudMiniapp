@@ -35,3 +35,5 @@
     </view>
   </view>
 </view>
+
+<bottom-tab-bar active="dashboard"></bottom-tab-bar>

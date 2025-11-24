@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "PPT 生成状态",
-  "usingComponents": {}
+  "usingComponents": {
+    "bottom-tab-bar": "/components/bottom-tab-bar/index"
+  }
 }

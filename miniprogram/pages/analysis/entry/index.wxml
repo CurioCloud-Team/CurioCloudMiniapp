@@ -29,3 +29,5 @@
   <button class="primary" bindtap="submit" loading="{{loading}}" disabled="{{loading}}">生成分析报告</button>
   <button class="secondary" bindtap="goSavedReports" disabled="{{loading}}">查看历史报告</button>
 </view>
+
+<bottom-tab-bar active="analysis"></bottom-tab-bar>

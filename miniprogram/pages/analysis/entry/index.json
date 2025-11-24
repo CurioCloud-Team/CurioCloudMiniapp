@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "学情分析",
   "usingComponents": {
-    "section-header": "/components/section-header/index"
+    "section-header": "/components/section-header/index",
+    "bottom-tab-bar": "/components/bottom-tab-bar/index"
   }
 }

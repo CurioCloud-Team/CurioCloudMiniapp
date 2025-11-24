@@ -31,3 +31,5 @@
     </view>
   </view>
 </view>
+
+<bottom-tab-bar active="teaching"></bottom-tab-bar>

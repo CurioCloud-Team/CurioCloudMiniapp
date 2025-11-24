@@ -8,3 +8,5 @@
     </view>
   </view>
 </view>
+
+<bottom-tab-bar active="ppt"></bottom-tab-bar>

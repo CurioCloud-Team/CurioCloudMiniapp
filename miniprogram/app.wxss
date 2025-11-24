@@ -2,6 +2,8 @@ page {
   background: #f5f6fb;
   font-family: 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
   color: #111827;
+  padding-bottom: 180rpx;
+  box-sizing: border-box;
 }
 
 .container {
