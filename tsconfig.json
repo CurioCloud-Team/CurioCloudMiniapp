@@ -12,7 +12,8 @@
       "@/types/*": ["types/*"],
       "@/services/*": ["services/*"],
       "@/utils/*": ["utils/*"],
-      "@/store/*": ["store/*"]
+      "@/store/*": ["store/*"],
+      "tdesign-miniprogram/*":["./miniprogram/miniprogram_npm/tdesign-miniprogram/*"]
     }
   },
   "include": [

@@ -7,8 +7,8 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "setting": {
-    "es6": false,
-    "enhance": false,
+    "es6": true,
+    "enhance": true,
     "urlCheck": false,
     "postcss": false,
     "minified": false,
@@ -22,8 +22,13 @@
       "outputPath": ""
     },
     "compileWorklet": false,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./miniprogram/"
+      }
+    ],
     "minifyWXSS": false,
     "minifyWXML": false,
     "localPlugins": false,
