@@ -3,8 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "watch": "tsc -p tsconfig.json -w",
+    "clean": "node scripts/clean.js",
+    "build": "node scripts/build.js && tsc -p tsconfig.json",
+    "dev": "node scripts/watch.js",
     "lint": "tsc --noEmit -p tsconfig.json"
   },
   "devDependencies": {
@@ -12,6 +13,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "chokidar": "^4.0.3",
     "tdesign-miniprogram": "^1.11.2"
   }
 }

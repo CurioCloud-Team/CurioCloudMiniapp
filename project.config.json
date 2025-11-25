@@ -1,5 +1,5 @@
 {
-  "miniprogramRoot": "miniprogram/",
+  "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
   "appid": "wx45c0c2f5fb443db9",
   "projectname": "curiocloud-weapp",
@@ -26,7 +26,7 @@
     "packNpmRelationList": [
       {
         "packageJsonPath": "./package.json",
-        "miniprogramNpmDistDir": "./miniprogram/"
+        "miniprogramNpmDistDir": "./dist/"
       }
     ],
     "minifyWXSS": false,
