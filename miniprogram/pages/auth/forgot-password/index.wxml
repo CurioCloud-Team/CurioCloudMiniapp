@@ -1,16 +1,73 @@
+<t-navbar title="找回密码" left-arrow="{{true}}" fixed="{{true}}" class="custom-navbar" bind:go-back="goBack" />
+
 <view class="auth-page">
+  <!-- 装饰性背景元素 -->
+  <view class="bg-decoration">
+    <view class="blur-orb blur-orb-1"></view>
+    <view class="blur-orb blur-orb-2"></view>
+    <view class="blur-orb blur-orb-3"></view>
+  </view>
+
+  <!-- 顶部品牌区域 -->
   <view class="hero">
+    <view class="logo-container">
+      <view class="logo-glow"></view>
+      <view class="logo-icon">
+        <t-icon name="lock-off" size="64rpx" color="#6366f1" />
+      </view>
+    </view>
     <text class="brand">重置密码</text>
     <text class="subtitle">输入注册邮箱接收验证码</text>
   </view>
 
-  <view class="form-card">
-    <view class="form-field">
-      <text class="label">邮箱</text>
-      <input class="input" placeholder="请输入注册邮箱" value="{{email}}" bindinput="onInput" />
+  <!-- 表单卡片 - 毛玻璃效果 -->
+  <view class="form-card glass-card">
+    <view class="form-body">
+      <view class="form-field">
+        <view class="field-label">
+          <t-icon name="mail" size="32rpx" color="#6366f1" />
+          <text>邮箱</text>
+        </view>
+        <t-input 
+          class="glass-input"
+          placeholder="请输入注册邮箱" 
+          value="{{email}}" 
+          bind:change="onInput"
+          borderless
+        />
+      </view>
     </view>
 
-    <button class="primary" bindtap="handleSubmit" loading="{{loading}}">发送重置邮件</button>
-    <button class="link" bindtap="goBack">返回登录</button>
+    <view class="form-actions">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        shape="round"
+        loading="{{loading}}"
+        bind:tap="handleSubmit"
+        class="submit-btn"
+      >
+        发送重置邮件
+      </t-button>
+      
+      <view class="login-link" bindtap="goBack">
+        <t-icon name="chevron-left" size="28rpx" color="#6366f1" />
+        <text class="link-text">返回登录</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提示信息 -->
+  <view class="tips-card glass-card">
+    <view class="tips-title">
+      <t-icon name="info-circle" size="32rpx" color="#6366f1" />
+      <text>温馨提示</text>
+    </view>
+    <view class="tips-content">
+      <text>• 请检查邮箱收件箱和垃圾邮件</text>
+      <text>• 重置链接 24 小时内有效</text>
+      <text>• 如有问题请联系管理员</text>
+    </view>
   </view>
 </view>

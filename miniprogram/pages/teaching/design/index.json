@@ -1,7 +1,16 @@
 {
   "navigationBarTitleText": "教学设计",
+  "navigationStyle": "custom",
   "usingComponents": {
     "section-header": "/components/section-header/index",
-    "bottom-tab-bar": "/components/bottom-tab-bar/index"
+    "bottom-tab-bar": "/components/bottom-tab-bar/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-dropdown-menu": "tdesign-miniprogram/dropdown-menu/dropdown-menu",
+    "t-dropdown-item": "tdesign-miniprogram/dropdown-item/dropdown-item",
+    "t-swipe-cell": "tdesign-miniprogram/swipe-cell/swipe-cell",
+    "t-empty": "tdesign-miniprogram/empty/empty",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

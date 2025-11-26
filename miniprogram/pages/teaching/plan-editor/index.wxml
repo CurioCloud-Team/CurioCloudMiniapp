@@ -1,43 +1,174 @@
+<t-navbar 
+  title="{{planId ? '编辑教案' : '新建教案'}}" 
+  left-arrow="{{true}}" 
+  fixed="{{true}}" 
+  class="custom-navbar"
+  bind:go-back="goBack"
+/>
+
 <view class="page">
-  <view class="section">
-    <view class="form-field">
-      <text class="label">标题</text>
-      <input class="input" placeholder="如：函数图像导入课" value="{{form.title}}" data-field="title" bindinput="onInput" />
-    </view>
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+  </view>
 
-    <view class="form-row">
-      <view class="form-field">
-        <text class="label">学科</text>
-        <input class="input" placeholder="数学" value="{{form.subject}}" data-field="subject" bindinput="onInput" />
+  <!-- 表单内容 -->
+  <view class="form-container">
+    <!-- 基本信息卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <t-icon name="file-paste" size="40rpx" color="#667eea" />
+        <text class="card-title">基本信息</text>
       </view>
+
       <view class="form-field">
-        <text class="label">年级</text>
-        <input class="input" placeholder="高一" value="{{form.grade}}" data-field="grade" bindinput="onInput" />
+        <text class="label">教案标题</text>
+        <t-input 
+          class="glass-input"
+          placeholder="如：函数图像导入课" 
+          value="{{form.title}}" 
+          data-field="title" 
+          bind:change="onInput"
+        />
+      </view>
+
+      <view class="form-row">
+        <view class="form-field flex-1">
+          <text class="label">学科</text>
+          <t-input 
+            class="glass-input"
+            placeholder="数学" 
+            value="{{form.subject}}" 
+            data-field="subject" 
+            bind:change="onInput"
+          />
+        </view>
+        <view class="form-field flex-1">
+          <text class="label">年级</text>
+          <t-input 
+            class="glass-input"
+            placeholder="高一" 
+            value="{{form.grade}}" 
+            data-field="grade" 
+            bind:change="onInput"
+          />
+        </view>
       </view>
     </view>
 
-    <view class="form-field">
-      <text class="label">教学目标</text>
-      <textarea class="textarea" placeholder="描述教学目标" value="{{form.teaching_objective}}" data-field="teaching_objective" bindinput="onInput"></textarea>
+    <!-- 教学内容卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <t-icon name="lightbulb" size="40rpx" color="#f59e0b" />
+        <text class="card-title">教学内容</text>
+      </view>
+
+      <view class="form-field">
+        <text class="label">教学目标</text>
+        <t-textarea 
+          class="glass-textarea"
+          placeholder="描述本节课的教学目标..." 
+          value="{{form.teaching_objective}}" 
+          data-field="teaching_objective" 
+          bind:change="onInput"
+          autosize
+        />
+      </view>
+
+      <view class="form-field">
+        <text class="label">教学大纲</text>
+        <t-textarea 
+          class="glass-textarea"
+          placeholder="按行输入教学步骤..." 
+          value="{{form.teaching_outline}}" 
+          data-field="teaching_outline" 
+          bind:change="onInput"
+          autosize
+        />
+      </view>
     </view>
 
-    <view class="form-field">
-      <text class="label">教学大纲</text>
-      <textarea class="textarea" placeholder="按行输入教学步骤" value="{{form.teaching_outline}}" data-field="teaching_outline" bindinput="onInput"></textarea>
-    </view>
+    <!-- 教学活动卡片 -->
+    <view class="form-card">
+      <view class="card-header">
+        <t-icon name="task" size="40rpx" color="#10b981" />
+        <text class="card-title">教学活动</text>
+        <view class="add-btn" bindtap="addActivity">
+          <t-icon name="add" size="32rpx" color="#667eea" />
+          <text>添加</text>
+        </view>
+      </view>
 
-    <view class="activities-header">
-      <text>教学活动</text>
-      <button size="mini" bindtap="addActivity">添加</button>
-    </view>
+      <view class="activities-list">
+        <view wx:for="{{form.activities}}" wx:key="index" class="activity-card">
+          <view class="activity-header">
+            <view class="activity-index">{{index + 1}}</view>
+            <view class="activity-actions">
+              <view class="delete-btn" data-index="{{index}}" bindtap="removeActivity">
+                <t-icon name="delete" size="36rpx" color="#ef4444" />
+              </view>
+            </view>
+          </view>
+          
+          <view class="form-field">
+            <t-input 
+              class="glass-input"
+              placeholder="活动名称" 
+              data-index="{{index}}" 
+              data-field="activity_name" 
+              value="{{item.activity_name}}" 
+              bind:change="onActivityInput"
+            />
+          </view>
+          
+          <view class="form-field">
+            <t-textarea 
+              class="glass-textarea small"
+              placeholder="活动描述" 
+              data-index="{{index}}" 
+              data-field="description" 
+              value="{{item.description}}" 
+              bind:change="onActivityInput"
+              autosize
+            />
+          </view>
+          
+          <view class="duration-field">
+            <t-icon name="time" size="32rpx" color="#64748b" />
+            <t-input 
+              class="duration-input"
+              type="number" 
+              placeholder="时长" 
+              data-index="{{index}}" 
+              data-field="duration" 
+              value="{{item.duration}}" 
+              bind:change="onActivityInput"
+            />
+            <text class="duration-unit">分钟</text>
+          </view>
+        </view>
 
-    <view wx:for="{{form.activities}}" wx:key="index" class="activity-card">
-      <input class="input" placeholder="活动名称" data-index="{{index}}" data-field="activity_name" value="{{item.activity_name}}" bindinput="onActivityInput" />
-      <textarea class="textarea" placeholder="活动描述" data-index="{{index}}" data-field="description" value="{{item.description}}" bindinput="onActivityInput"></textarea>
-      <input class="input" type="number" placeholder="时长（分钟）" data-index="{{index}}" data-field="duration" value="{{item.duration}}" bindinput="onActivityInput" />
-      <button size="mini" type="warn" data-index="{{index}}" bindtap="removeActivity">删除</button>
+        <view wx:if="{{form.activities.length === 0}}" class="empty-activities">
+          <t-icon name="add-circle" size="80rpx" color="#cbd5e1" />
+          <text>点击上方按钮添加教学活动</text>
+        </view>
+      </view>
     </view>
+  </view>
 
-    <button class="primary" bindtap="handleSubmit" loading="{{loading}}">保存教案</button>
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <t-button 
+      theme="primary" 
+      size="large" 
+      block 
+      loading="{{loading}}"
+      bindtap="handleSubmit"
+      class="submit-btn"
+    >
+      <t-icon wx:if="{{!loading}}" name="check" size="36rpx" />
+      保存教案
+    </t-button>
   </view>
 </view>

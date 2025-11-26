@@ -1,8 +1,13 @@
 {
   "navigationBarTitleText": "CurioCloud",
+  "navigationStyle": "custom",
   "usingComponents": {
     "section-header": "/components/section-header/index",
     "feature-card": "/components/feature-card/index",
-    "bottom-tab-bar": "/components/bottom-tab-bar/index"
+    "bottom-tab-bar": "/components/bottom-tab-bar/index",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-avatar": "tdesign-miniprogram/avatar/avatar",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

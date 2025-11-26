@@ -7,7 +7,8 @@ Page({
   },
 
   onInput(event: any) {
-    ;(this as any).setData({ email: event.detail.value })
+    const value = event.detail.value
+    ;(this as any).setData({ email: value })
   },
 
   async handleSubmit() {

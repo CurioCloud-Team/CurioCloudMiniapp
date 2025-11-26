@@ -1,25 +1,127 @@
+<t-navbar 
+  title="教案详情" 
+  left-arrow="{{true}}" 
+  fixed="{{true}}" 
+  class="custom-navbar"
+  bind:go-back="goBack"
+>
+  <view slot="right" class="header-action" bindtap="editPlan">
+    <t-icon name="edit" size="40rpx" color="#fff" />
+  </view>
+</t-navbar>
+
 <view class="page">
-  <view class="section">
-    <section-header title="{{plan.title}}" description="{{plan.subject}} · {{plan.grade}}"></section-header>
-    <view class="objective">
-      <text class="label">教学目标</text>
-      <text>{{plan.teaching_objective}}</text>
-    </view>
-    <view class="outline">
-      <text class="label">教学大纲</text>
-      <view wx:for="{{outlineParagraphs}}" wx:key="index" class="outline-item">{{item}}</view>
-    </view>
-    <view class="activities">
-      <text class="label">教学活动</text>
-      <view wx:for="{{plan.activities}}" wx:key="index" class="activity">
-        <view class="activity-title">{{item.activity_name}} · {{item.duration}} 分钟</view>
-        <view class="activity-desc">{{item.description}}</view>
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+    <view class="orb orb-3"></view>
+  </view>
+
+  <!-- 教案头部卡片 -->
+  <view class="hero-card">
+    <view class="hero-bg"></view>
+    <view class="hero-content">
+      <view class="plan-badges">
+        <t-tag theme="light" variant="light" size="small">{{plan.subject}}</t-tag>
+        <t-tag theme="light" variant="light" size="small">{{plan.grade}}</t-tag>
+      </view>
+      <text class="plan-title">{{plan.title}}</text>
+      <view class="plan-meta">
+        <view class="meta-item">
+          <t-icon name="task" size="32rpx" color="rgba(255,255,255,0.8)" />
+          <text>{{plan.activities.length}} 个活动</text>
+        </view>
+        <view class="meta-item">
+          <t-icon name="time" size="32rpx" color="rgba(255,255,255,0.8)" />
+          <text>{{totalDuration}} 分钟</text>
+        </view>
       </view>
     </view>
-    <view class="actions">
-      <button class="primary" bindtap="generatePPT">生成 PPT</button>
-      <button class="ghost" bindtap="openExercises">习题助手</button>
-      <button class="ghost" bindtap="editPlan">编辑</button>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-area">
+    <!-- 教学目标 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="section-icon objective-icon">
+          <t-icon name="lightbulb" size="36rpx" color="#f59e0b" />
+        </view>
+        <text class="section-title">教学目标</text>
+      </view>
+      <view class="section-content">
+        <text class="objective-text">{{plan.teaching_objective || '暂无教学目标'}}</text>
+      </view>
+    </view>
+
+    <!-- 教学大纲 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="section-icon outline-icon">
+          <t-icon name="format-vertical-align-left" size="36rpx" color="#667eea" />
+        </view>
+        <text class="section-title">教学大纲</text>
+      </view>
+      <view class="section-content">
+        <view wx:if="{{outlineParagraphs.length}}" class="outline-list">
+          <view wx:for="{{outlineParagraphs}}" wx:key="index" class="outline-item">
+            <view class="outline-marker">{{index + 1}}</view>
+            <text class="outline-text">{{item}}</text>
+          </view>
+        </view>
+        <text wx:else class="empty-text">暂无教学大纲</text>
+      </view>
+    </view>
+
+    <!-- 教学活动 -->
+    <view class="section-card">
+      <view class="section-header">
+        <view class="section-icon activity-icon">
+          <t-icon name="play-circle" size="36rpx" color="#10b981" />
+        </view>
+        <text class="section-title">教学活动</text>
+        <text class="section-count">{{plan.activities.length}} 项</text>
+      </view>
+      <view class="section-content">
+        <view wx:if="{{plan.activities.length}}" class="activity-list">
+          <view wx:for="{{plan.activities}}" wx:key="index" class="activity-card">
+            <view class="activity-left">
+              <view class="activity-index">{{index + 1}}</view>
+              <view class="activity-line" wx:if="{{index < plan.activities.length - 1}}"></view>
+            </view>
+            <view class="activity-body">
+              <view class="activity-header">
+                <text class="activity-name">{{item.activity_name}}</text>
+                <view class="activity-duration">
+                  <t-icon name="time" size="28rpx" color="#64748b" />
+                  <text>{{item.duration}} 分钟</text>
+                </view>
+              </view>
+              <text class="activity-desc">{{item.description}}</text>
+            </view>
+          </view>
+        </view>
+        <text wx:else class="empty-text">暂无教学活动</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-actions">
+    <view class="action-grid">
+      <view class="action-item primary-action" bindtap="generatePPT">
+        <view class="action-icon">
+          <t-icon name="file-powerpoint" size="44rpx" color="#fff" />
+        </view>
+        <text class="action-label">生成 PPT</text>
+      </view>
+      <view class="action-item secondary-action" bindtap="openExercises">
+        <view class="action-icon">
+          <t-icon name="edit-2" size="44rpx" color="#667eea" />
+        </view>
+        <text class="action-label">习题助手</text>
+      </view>
     </view>
   </view>
 </view>

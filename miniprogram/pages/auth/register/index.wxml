@@ -1,16 +1,62 @@
+<t-navbar title="注册" left-arrow="{{true}}" fixed="{{true}}" class="custom-navbar" bind:go-back="gotoLogin" />
+
 <view class="auth-page">
+  <!-- 装饰性背景元素 -->
+  <view class="bg-decoration">
+    <view class="blur-orb blur-orb-1"></view>
+    <view class="blur-orb blur-orb-2"></view>
+    <view class="blur-orb blur-orb-3"></view>
+  </view>
+
+  <!-- 顶部品牌区域 -->
   <view class="hero">
+    <view class="logo-container">
+      <view class="logo-glow"></view>
+      <view class="logo-icon">
+        <t-icon name="user-add" size="64rpx" color="#6366f1" />
+      </view>
+    </view>
     <text class="brand">创建账户</text>
     <text class="subtitle">加入 CurioCloud，开启智能备课</text>
   </view>
 
-  <view class="form-card">
-    <view class="form-field" wx:for="{{fields}}" wx:key="field">
-      <text class="label">{{item.label}}</text>
-      <input class="input" placeholder="{{item.placeholder}}" data-field="{{item.field}}" value="{{form[item.field]}}" bindinput="onInput" password="{{item.password}}" />
+  <!-- 注册卡片 - 毛玻璃效果 -->
+  <view class="form-card glass-card">
+    <view class="form-body">
+      <view class="form-field" wx:for="{{fields}}" wx:key="field">
+        <view class="field-label">
+          <t-icon name="{{item.icon}}" size="32rpx" color="#6366f1" />
+          <text>{{item.label}}</text>
+        </view>
+        <t-input 
+          class="glass-input"
+          placeholder="{{item.placeholder}}" 
+          value="{{form[item.field]}}" 
+          data-field="{{item.field}}"
+          type="{{item.password ? 'password' : 'text'}}"
+          bind:change="onInput"
+          borderless
+        />
+      </view>
     </view>
 
-    <button class="primary" bindtap="handleSubmit" loading="{{loading}}">立即注册</button>
-    <button class="link" bindtap="gotoLogin">已有账号？前往登录</button>
+    <view class="form-actions">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        shape="round"
+        loading="{{loading}}"
+        bind:tap="handleSubmit"
+        class="submit-btn"
+      >
+        立即注册
+      </t-button>
+      
+      <view class="login-link" bindtap="gotoLogin">
+        <text>已有账号？</text>
+        <text class="link-text">前往登录</text>
+      </view>
+    </view>
   </view>
 </view>

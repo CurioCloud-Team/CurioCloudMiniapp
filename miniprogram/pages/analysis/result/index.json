@@ -1,3 +1,11 @@
 {
-  "navigationBarTitleText": "分析报告详情"
+  "navigationBarTitleText": "分析报告详情",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+  }
 }

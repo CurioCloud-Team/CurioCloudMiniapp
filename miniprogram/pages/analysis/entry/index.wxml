@@ -1,33 +1,116 @@
 <view class="page">
-  <section-header title="学情分析上传" description="粘贴学生成绩，快速生成分析报告">
-    <view />
-  </section-header>
-
-  <view class="form-field">
-    <text class="label">考试名称</text>
-    <input class="input" type="text" placeholder="例如：期中考试" value="{{examName}}" bindinput="onExamNameInput" />
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+    <view class="orb orb-3"></view>
   </view>
 
-  <view class="form-field">
-    <text class="label">学科</text>
-    <input class="input" type="text" placeholder="例如：数学" value="{{subject}}" bindinput="onSubjectInput" />
-  </view>
+  <!-- TDesign 导航栏 -->
+  <t-navbar 
+    title="学情分析" 
+    fixed="{{true}}" 
+    class="custom-navbar"
+  >
+    <view slot="right" class="navbar-action" bindtap="goSavedReports">
+      <t-icon name="history" size="44rpx" color="#667eea" />
+    </view>
+  </t-navbar>
 
-  <view class="form-field">
-    <text class="label">成绩数据</text>
-    <textarea
-      class="textarea"
-      placeholder="每行格式：姓名,分数\n张三,88\n李四,75"
-      value="{{rawEntries}}"
-      bindinput="onEntriesInput"
-      maxlength="-1"
-      auto-height
-    />
-    <text class="hint">提示：姓名与分数使用中文或英文逗号分隔，自动忽略空行。</text>
-  </view>
+  <!-- 主要内容 -->
+  <view class="content-area">
+    <!-- 顶部提示卡片 -->
+    <view class="tip-card">
+      <view class="tip-icon">
+        <t-icon name="chart-analytics" size="48rpx" color="#667eea" />
+      </view>
+      <view class="tip-content">
+        <text class="tip-title">智能学情分析</text>
+        <text class="tip-desc">输入学生成绩，AI 快速生成分析报告</text>
+      </view>
+    </view>
 
-  <button class="primary" bindtap="submit" loading="{{loading}}" disabled="{{loading}}">生成分析报告</button>
-  <button class="secondary" bindtap="goSavedReports" disabled="{{loading}}">查看历史报告</button>
+    <!-- 表单卡片 -->
+    <view class="form-card">
+      <!-- 考试名称 -->
+      <view class="form-field">
+        <view class="field-header">
+          <t-icon name="file-copy" size="36rpx" color="#667eea" />
+          <text class="label">考试名称</text>
+        </view>
+        <view class="input-wrapper">
+          <input 
+            class="custom-input" 
+            type="text" 
+            placeholder="例如：期中考试" 
+            value="{{examName}}" 
+            bindinput="onExamNameInput" 
+          />
+        </view>
+      </view>
+
+      <!-- 学科 -->
+      <view class="form-field">
+        <view class="field-header">
+          <t-icon name="book" size="36rpx" color="#10b981" />
+          <text class="label">学科</text>
+        </view>
+        <view class="input-wrapper">
+          <input 
+            class="custom-input" 
+            type="text" 
+            placeholder="例如：数学" 
+            value="{{subject}}" 
+            bindinput="onSubjectInput" 
+          />
+        </view>
+      </view>
+
+      <!-- 成绩数据 -->
+      <view class="form-field">
+        <view class="field-header">
+          <t-icon name="table" size="36rpx" color="#f59e0b" />
+          <text class="label">成绩数据</text>
+        </view>
+        <view class="textarea-wrapper">
+          <textarea
+            class="custom-textarea"
+            placeholder="每行格式：姓名,分数&#10;张三,88&#10;李四,75"
+            value="{{rawEntries}}"
+            bindinput="onEntriesInput"
+            maxlength="-1"
+            auto-height
+          />
+        </view>
+        <view class="hint-box">
+          <t-icon name="info-circle" size="28rpx" color="#64748b" />
+          <text class="hint">姓名与分数使用逗号分隔，自动忽略空行</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="actions-area">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        loading="{{loading}}"
+        disabled="{{loading}}"
+        bindtap="submit"
+        class="submit-btn"
+      >
+        <t-icon wx:if="{{!loading}}" name="chart-pie" size="36rpx" />
+        生成分析报告
+      </t-button>
+
+      <view class="secondary-action" bindtap="goSavedReports">
+        <t-icon name="history" size="32rpx" color="#667eea" />
+        <text>查看历史报告</text>
+      </view>
+    </view>
+  </view>
 </view>
 
 <bottom-tab-bar active="analysis"></bottom-tab-bar>
+

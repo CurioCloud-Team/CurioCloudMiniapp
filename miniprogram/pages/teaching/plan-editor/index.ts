@@ -32,6 +32,10 @@ Page({
     }
   },
 
+  goBack() {
+    wx.navigateBack()
+  },
+
   onInput(event: any) {
     const field = event.currentTarget.dataset.field
     ;(this as any).setData({ [`form.${field}`]: event.detail.value })

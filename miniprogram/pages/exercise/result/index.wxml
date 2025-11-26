@@ -1,14 +1,116 @@
 <view class="page">
-  <view class="section" wx:if="{{questions.length}}">
-    <view class="question" wx:for="{{questions}}" wx:key="id">
-      <view class="question-title">Q{{index + 1}} {{item.content}}</view>
-      <view class="question-meta">难度：{{item.difficulty}}</view>
-      <view wx:if="{{item.choices && item.choices.length}}" class="choices">
-        <view wx:for="{{item.choices}}" wx:for-item="choice" wx:key="id" class="choice">{{choice.label}}. {{choice.content}}</view>
-      </view>
-      <view wx:if="{{item.answer}}" class="answer">答案：{{item.answer}}</view>
-    </view>
-    <button class="primary" bindtap="backToAssistant">继续生成</button>
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
   </view>
-  <view wx:else class="empty">暂无数据，请先生成习题。</view>
+
+  <!-- TDesign 导航栏 -->
+  <t-navbar 
+    title="生成结果" 
+    fixed="{{true}}" 
+    left-arrow 
+    bind:go-back="goBack"
+    class="custom-navbar" 
+  />
+
+  <!-- 主要内容 -->
+  <view class="content-area" wx:if="{{questions.length}}">
+    <!-- 统计卡片 -->
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-value">{{questions.length}}</text>
+        <text class="stat-label">题目总数</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{typeLabel}}</text>
+        <text class="stat-label">题型</text>
+      </view>
+    </view>
+
+    <!-- 题目列表 -->
+    <view class="question-list">
+      <view class="question-card" wx:for="{{questions}}" wx:key="id">
+        <view class="question-header">
+          <view class="question-number">
+            <text>{{index + 1}}</text>
+          </view>
+          <t-tag 
+            theme="{{item.difficulty === 'easy' ? 'success' : (item.difficulty === 'medium' ? 'warning' : 'danger')}}" 
+            variant="light"
+            size="small"
+          >
+            {{item.difficulty === 'easy' ? '简单' : (item.difficulty === 'medium' ? '中等' : '困难')}}
+          </t-tag>
+        </view>
+
+        <view class="question-content">
+          <text class="question-text">{{item.content}}</text>
+        </view>
+
+        <!-- 选择题选项 -->
+        <view wx:if="{{item.choices && item.choices.length}}" class="choices-list">
+          <view 
+            wx:for="{{item.choices}}" 
+            wx:for-item="choice" 
+            wx:key="id" 
+            class="choice-item {{item.answer === choice.label ? 'correct' : ''}}"
+          >
+            <view class="choice-label">{{choice.label}}</view>
+            <text class="choice-text">{{choice.content}}</text>
+          </view>
+        </view>
+
+        <!-- 答案区域 -->
+        <view class="answer-section" wx:if="{{item.answer}}">
+          <view class="answer-header">
+            <t-icon name="check-circle" size="32rpx" color="#10b981" />
+            <text class="answer-label">参考答案</text>
+          </view>
+          <text class="answer-text">{{item.answer}}</text>
+        </view>
+
+        <!-- 解析区域 -->
+        <view class="explanation-section" wx:if="{{item.explanation}}">
+          <view class="explanation-header">
+            <t-icon name="lightbulb" size="32rpx" color="#f59e0b" />
+            <text class="explanation-label">解析</text>
+          </view>
+          <text class="explanation-text">{{item.explanation}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作 -->
+    <view class="bottom-actions">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block
+        bindtap="backToAssistant"
+        class="action-btn"
+      >
+        <t-icon name="add" size="36rpx" />
+        继续生成
+      </t-button>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <view class="empty-card">
+      <t-icon name="file-unknown" size="120rpx" color="#cbd5e1" />
+      <text class="empty-title">暂无数据</text>
+      <text class="empty-desc">请先生成习题</text>
+      <t-button 
+        theme="primary" 
+        size="medium"
+        bindtap="backToAssistant"
+        class="empty-btn"
+      >
+        去生成
+      </t-button>
+    </view>
+  </view>
 </view>

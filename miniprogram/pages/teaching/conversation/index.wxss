@@ -1,56 +1,264 @@
 .page {
-  padding: 32rpx;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  padding: 0;
+  padding-top: calc(env(safe-area-inset-top) + 96rpx);
 }
 
-.chat-box {
-  background: #f8fafc;
+/* 自定义导航栏样式 */
+.custom-navbar {
+  --td-navbar-bg-color: rgba(255, 255, 255, 0.85);
+  --td-navbar-title-font-size: 34rpx;
+  --td-navbar-title-color: #1e1b4b;
+}
+
+.nav-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 50%;
+  box-shadow: 0 4rpx 16rpx rgba(99, 102, 241, 0.3);
+  margin-right: 16rpx;
+}
+
+/* ===== 装饰性背景 ===== */
+.bg-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blur-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100rpx);
+}
+
+.blur-orb-1 {
+  width: 400rpx;
+  height: 400rpx;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%);
+  top: -100rpx;
+  right: -100rpx;
+}
+
+.blur-orb-2 {
+  width: 300rpx;
+  height: 300rpx;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+  bottom: 200rpx;
+  left: -80rpx;
+}
+
+/* ===== 对话容器 ===== */
+.chat-container {
+  flex: 1;
+  padding: 24rpx 32rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.chat-messages {
+  padding-bottom: 32rpx;
+}
+
+/* ===== 消息样式 ===== */
+.message-wrapper {
+  margin-bottom: 24rpx;
+  display: flex;
+}
+
+.message-wrapper.ai {
+  justify-content: flex-start;
+}
+
+.message-wrapper.user {
+  justify-content: flex-end;
+}
+
+.message-bubble.glass-card {
+  max-width: 85%;
+  padding: 20rpx 28rpx;
   border-radius: 24rpx;
-  padding: 24rpx;
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+}
+
+.message-wrapper.ai .message-bubble.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  border: 2rpx solid rgba(255, 255, 255, 0.6);
+  border-radius: 8rpx 24rpx 24rpx 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(99, 102, 241, 0.08);
+}
+
+.message-wrapper.user .message-bubble.glass-card {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #fff;
+  border: none;
+  border-radius: 24rpx 8rpx 24rpx 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(99, 102, 241, 0.25);
+}
+
+.message-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.message-content {
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #1e1b4b;
+}
+
+.message-wrapper.user .message-content {
+  color: #fff;
+}
+
+/* ===== 问答面板 ===== */
+.question-panel.glass-card {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  margin: 0 32rpx 32rpx;
+  padding: 32rpx;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(40rpx);
+  -webkit-backdrop-filter: blur(40rpx);
+  border-radius: 32rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 -8rpx 32rpx rgba(99, 102, 241, 0.1);
+}
+
+.question-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
   margin-bottom: 24rpx;
 }
 
-.message {
-  margin-bottom: 16rpx;
-  padding: 18rpx 20rpx;
-  border-radius: 18rpx;
-}
-
-.message.ai {
-  background: #e0f2fe;
-  color: #0f172a;
-}
-
-.message.user {
-  background: #d1fae5;
-  color: #065f46;
-  text-align: right;
-}
-
-.question-card {
-  background: #fff;
-  border-radius: 24rpx;
-  padding: 24rpx;
-  box-shadow: 0 12rpx 24rpx rgba(15, 23, 42, 0.05);
+.question-icon {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 16rpx;
+  flex-shrink: 0;
 }
 
 .question-title {
+  flex: 1;
+  font-size: 30rpx;
   font-weight: 600;
-  margin-bottom: 16rpx;
+  color: #1e1b4b;
+  line-height: 1.5;
 }
 
-.option {
-  margin: 8rpx 0;
+/* ===== 选项网格 ===== */
+.options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.option-btn {
+  padding: 20rpx 32rpx;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16rpx);
+  -webkit-backdrop-filter: blur(16rpx);
   border-radius: 999rpx;
+  border: 2rpx solid rgba(99, 102, 241, 0.2);
+  font-size: 28rpx;
+  color: #4338ca;
+  transition: all 0.2s ease;
 }
 
-.answer-input {
-  background: #f1f5f9;
-  border-radius: 16rpx;
-  padding: 16rpx;
-  min-height: 160rpx;
-  margin: 16rpx 0;
+.option-btn--active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.15) 100%);
+  border-color: #6366f1;
+  color: #4f46e5;
 }
 
-.completed {
-  text-align: center;
+.option-btn--hover {
+  transform: scale(0.98);
+}
+
+/* ===== 文本输入 ===== */
+.answer-textarea {
+  margin-bottom: 24rpx;
+}
+
+.glass-textarea {
+  --td-textarea-background-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16rpx);
+  -webkit-backdrop-filter: blur(16rpx);
+  border-radius: 20rpx;
+  border: 2rpx solid rgba(99, 102, 241, 0.15);
+}
+
+/* ===== 提交按钮 ===== */
+.submit-btn {
+  --td-button-primary-bg-color: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --td-button-primary-border-color: transparent;
+  --td-button-large-height: 96rpx;
+  box-shadow: 0 8rpx 24rpx rgba(99, 102, 241, 0.3);
+}
+
+/* ===== 完成面板 ===== */
+.completed-panel.glass-card {
+  margin: 32rpx;
+  padding: 48rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(40rpx);
+  -webkit-backdrop-filter: blur(40rpx);
+  border-radius: 32rpx;
+  box-shadow: 0 16rpx 48rpx rgba(99, 102, 241, 0.12);
+}
+
+.completed-icon {
+  margin-bottom: 24rpx;
+}
+
+.completed-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1e1b4b;
+}
+
+.completed-desc {
+  font-size: 28rpx;
+  color: #6366f1;
+  opacity: 0.8;
+  margin-top: 8rpx;
+  margin-bottom: 32rpx;
+}
+
+.view-btn {
+  --td-button-primary-bg-color: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --td-button-primary-border-color: transparent;
+  box-shadow: 0 8rpx 24rpx rgba(16, 185, 129, 0.3);
 }

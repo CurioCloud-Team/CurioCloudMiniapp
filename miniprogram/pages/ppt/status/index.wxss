@@ -1,24 +1,196 @@
 .page {
-  padding: 32rpx;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #f0f4ff 0%, #faf5ff 50%, #ecfdf5 100%);
+  position: relative;
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
 
+/* 自定义导航栏样式 */
+.custom-navbar {
+  --td-navbar-bg-color: rgba(255, 255, 255, 0.85);
+  --td-navbar-title-font-size: 34rpx;
+  --td-navbar-title-color: #1e293b;
+}
+
+/* 装饰背景 */
+.bg-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60rpx);
+  opacity: 0.4;
+}
+
+.orb-1 {
+  width: 400rpx;
+  height: 400rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  top: -100rpx;
+  right: -100rpx;
+  animation: float1 8s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 350rpx;
+  height: 350rpx;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  bottom: 200rpx;
+  left: -100rpx;
+  animation: float2 10s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30rpx, 30rpx) scale(1.1); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20rpx, -20rpx) scale(1.05); }
+}
+
+/* 内容区域 */
+.content-area {
+  position: relative;
+  z-index: 1;
+  padding: calc(env(safe-area-inset-top) + 96rpx + 48rpx) 32rpx 32rpx;
+}
+
+/* 状态卡片 */
 .status-card {
-  background: #fff;
-  border-radius: 24rpx;
-  padding: 32rpx;
-  box-shadow: 0 16rpx 32rpx rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20rpx);
+  border-radius: 32rpx;
+  padding: 48rpx 32rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8rpx 32rpx rgba(102, 126, 234, 0.1);
+  text-align: center;
+  margin-bottom: 24rpx;
 }
 
-.title {
+/* 状态指示器 */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32rpx;
+}
+
+.indicator-ring {
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.indicator-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 状态文本 */
+.status-text {
+  margin-bottom: 32rpx;
+}
+
+.status-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 12rpx;
+}
+
+.status-desc {
+  display: block;
   font-size: 28rpx;
-  font-weight: 600;
+  color: #64748b;
 }
 
-.status {
-  margin: 16rpx 0;
+/* 项目信息 */
+.project-info {
+  padding: 24rpx;
+  background: rgba(241, 245, 249, 0.8);
+  border-radius: 20rpx;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.info-label {
+  font-size: 26rpx;
+  color: #64748b;
+}
+
+.info-value {
+  flex: 1;
+  text-align: right;
+  font-size: 26rpx;
+  color: #334155;
+  font-family: monospace;
+}
+
+/* 操作按钮卡片 */
+.actions-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 24rpx;
+}
+
+.refresh-btn {
+  --td-button-default-bg-color: rgba(255, 255, 255, 0.8);
+  --td-button-default-border-color: rgba(148, 163, 184, 0.3);
+  --td-button-border-radius: 24rpx;
+  --td-button-large-height: 96rpx;
+  backdrop-filter: blur(10rpx);
+}
+
+.refresh-btn t-icon {
+  margin-right: 12rpx;
+}
+
+.preview-btn {
+  --td-button-primary-bg-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --td-button-primary-border-color: transparent;
+  --td-button-border-radius: 24rpx;
+  --td-button-large-height: 96rpx;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+}
+
+.preview-btn t-icon {
+  margin-right: 12rpx;
+}
+
+/* 提示卡片 */
+.tip-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  padding: 24rpx;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 20rpx;
+  border: 1rpx solid rgba(102, 126, 234, 0.2);
+}
+
+.tip-text {
+  flex: 1;
+  font-size: 26rpx;
   color: #475569;
-}
-
-button + button {
-  margin-top: 16rpx;
+  line-height: 1.6;
 }

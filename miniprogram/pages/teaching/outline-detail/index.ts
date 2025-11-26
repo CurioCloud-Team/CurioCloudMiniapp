@@ -2,7 +2,7 @@ import { teachingStore } from '../../../store/teachingStore'
 
 Page({
   data: {
-    lessonPlan: {},
+    lessonPlan: {} as any,
     outlineParagraphs: [] as string[]
   },
 
@@ -16,5 +16,9 @@ Page({
       lessonPlan,
       outlineParagraphs: lessonPlan.teaching_outline?.split('\n').filter(Boolean) || []
     })
+  },
+
+  goBack() {
+    wx.navigateBack()
   }
 })

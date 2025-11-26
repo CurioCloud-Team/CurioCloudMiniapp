@@ -1,55 +1,242 @@
-.dashboard {
-  padding: 32rpx;
+/* 自定义导航栏样式 */
+.custom-navbar {
+  --td-navbar-bg-color: rgba(255, 255, 255, 0.85);
+  --td-navbar-title-font-size: 34rpx;
+  --td-navbar-title-color: #1e1b4b;
 }
 
-.stats {
+.dashboard {
+  padding: 32rpx;
+  padding-top: calc(env(safe-area-inset-top) + 96rpx + 32rpx);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ===== 装饰性背景 ===== */
+.bg-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blur-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100rpx);
+}
+
+.blur-orb-1 {
+  width: 600rpx;
+  height: 600rpx;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.2) 100%);
+  top: -200rpx;
+  right: -200rpx;
+}
+
+.blur-orb-2 {
+  width: 400rpx;
+  height: 400rpx;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+  bottom: 300rpx;
+  left: -150rpx;
+}
+
+/* ===== 欢迎卡片 ===== */
+.welcome-header.glass-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(40rpx);
+  -webkit-backdrop-filter: blur(40rpx);
+  border-radius: 36rpx;
+  padding: 36rpx;
+  margin-bottom: 32rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 12rpx 40rpx rgba(99, 102, 241, 0.1),
+    inset 0 2rpx 4rpx rgba(255, 255, 255, 0.9);
+}
+
+.welcome-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28rpx;
+}
+
+.avatar-wrapper {
+  position: relative;
+  margin-right: 24rpx;
+}
+
+.avatar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120rpx;
+  height: 120rpx;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(10rpx);
+}
+
+.user-avatar {
+  --td-avatar-bg-color: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.welcome-text {
+  flex: 1;
+}
+
+.greeting {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1e1b4b;
+  line-height: 1.3;
+}
+
+.subtitle {
+  font-size: 26rpx;
+  color: #6366f1;
+  opacity: 0.8;
+  margin-top: 6rpx;
+}
+
+/* ===== 统计网格 ===== */
+.stats-grid {
+  display: flex;
+  gap: 20rpx;
+}
+
+.stat-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16rpx);
+  -webkit-backdrop-filter: blur(16rpx);
+  border-radius: 20rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.6);
+}
+
+.stat-icon-wrapper {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(99, 102, 241, 0.1);
+  border-radius: 16rpx;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1e1b4b;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 22rpx;
+  color: #6366f1;
+  opacity: 0.75;
+}
+
+/* ===== 区块包装器 ===== */
+.section-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 32rpx;
+}
+
+/* ===== 教案卡片 ===== */
+.lesson-card.glass-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24rpx);
+  -webkit-backdrop-filter: blur(24rpx);
+  border-radius: 24rpx;
+  padding: 28rpx;
+  margin-bottom: 16rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8rpx 24rpx rgba(99, 102, 241, 0.08);
+  transition: all 0.3s ease;
+}
+
+.lesson-card--active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(99, 102, 241, 0.12);
+}
+
+.lesson-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.lesson-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1e1b4b;
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.lesson-meta {
   display: flex;
   gap: 24rpx;
 }
 
-.stat-card {
-  flex: 1;
-  background: #fff;
-  border-radius: 24rpx;
-  padding: 32rpx;
-  box-shadow: 0 16rpx 32rpx rgba(15, 23, 42, 0.08);
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 26rpx;
+  color: #6366f1;
+  opacity: 0.8;
 }
 
-.stat-value {
-  font-size: 40rpx;
-  font-weight: 700;
+.lesson-arrow {
+  position: absolute;
+  right: 24rpx;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.stat-label {
-  color: #94a3b8;
+/* ===== 空状态 ===== */
+.empty-state.glass-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx;
+  background: rgba(255, 255, 255, 0.45);
 }
 
-.lesson-card {
-  padding: 24rpx;
-  border-radius: 24rpx;
-  background: #fff;
-  margin-bottom: 16rpx;
-  box-shadow: 0 12rpx 24rpx rgba(15, 23, 42, 0.05);
+.empty-icon {
+  margin-bottom: 20rpx;
 }
 
-.lesson-title {
+.empty-text {
   font-size: 30rpx;
   font-weight: 600;
+  color: #4338ca;
 }
 
-.lesson-meta {
-  color: #64748b;
+.empty-hint {
+  font-size: 26rpx;
+  color: #a5b4fc;
   margin-top: 8rpx;
-}
-
-.lesson-date {
-  color: #94a3b8;
-  font-size: 24rpx;
-  margin-top: 4rpx;
-}
-
-.empty {
-  color: #94a3b8;
-  padding: 24rpx 0;
-  text-align: center;
 }

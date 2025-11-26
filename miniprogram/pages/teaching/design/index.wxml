@@ -1,33 +1,82 @@
+<t-navbar title="教学设计" fixed="{{true}}" class="custom-navbar">
+  <view slot="right" class="nav-actions">
+    <view class="action-btn" hover-class="action-btn--active" bindtap="openConversation">
+      <t-icon name="chat" size="40rpx" color="#6366f1" />
+    </view>
+    <view class="action-btn action-btn--primary" hover-class="action-btn--active" bindtap="createPlan">
+      <t-icon name="add" size="40rpx" color="#fff" />
+    </view>
+  </view>
+</t-navbar>
+
 <view class="page">
-  <view class="section">
-    <section-header title="教学设计" description="管理与生成教案">
-      <view slot="actions" class="inline-actions">
-        <button size="mini" class="ghost" bindtap="openConversation">AI 备课</button>
-        <button size="mini" class="primary" bindtap="createPlan">新建教案</button>
-      </view>
-    </section-header>
+  <!-- 装饰性背景 -->
+  <view class="bg-decoration">
+    <view class="blur-orb blur-orb-1"></view>
+    <view class="blur-orb blur-orb-2"></view>
+  </view>
 
-    <view class="filter-row">
-      <picker mode="selector" range="{{subjects}}" value="{{subjectIndex}}" bindchange="onSubjectChange">
-        <view class="filter-chip">{{subjects[subjectIndex]}}</view>
-      </picker>
-      <picker mode="selector" range="{{grades}}" value="{{gradeIndex}}" bindchange="onGradeChange">
-        <view class="filter-chip">{{grades[gradeIndex]}}</view>
-      </picker>
+  <!-- 筛选器 -->
+  <view class="filter-bar glass-card">
+    <view class="filter-chip {{subjectIndex > 0 ? 'filter-chip--active' : ''}}" bindtap="showSubjectPicker">
+      <t-icon name="book" size="28rpx" />
+      <text>{{subjects[subjectIndex]}}</text>
+      <t-icon name="caret-down-small" size="28rpx" />
+    </view>
+    <view class="filter-chip {{gradeIndex > 0 ? 'filter-chip--active' : ''}}" bindtap="showGradePicker">
+      <t-icon name="layers" size="28rpx" />
+      <text>{{grades[gradeIndex]}}</text>
+      <t-icon name="caret-down-small" size="28rpx" />
+    </view>
+  </view>
+
+  <!-- 学科选择器 -->
+  <picker mode="selector" range="{{subjects}}" value="{{subjectIndex}}" bindchange="onSubjectChange" class="hidden-picker" id="subjectPicker"></picker>
+  <picker mode="selector" range="{{grades}}" value="{{gradeIndex}}" bindchange="onGradeChange" class="hidden-picker" id="gradePicker"></picker>
+
+  <!-- 教案列表 -->
+  <view class="plan-list">
+    <view wx:if="{{filteredPlans.length === 0}}" class="empty-state glass-card">
+      <view class="empty-icon">
+        <t-icon name="file-add" size="100rpx" color="#a5b4fc" />
+      </view>
+      <view class="empty-title">暂无教案</view>
+      <view class="empty-desc">点击右上角 + 创建新教案</view>
+      <t-button theme="primary" size="medium" shape="round" class="empty-btn" bind:tap="createPlan">
+        <t-icon name="add" size="32rpx" slot="icon" />
+        创建教案
+      </t-button>
     </view>
 
-    <view wx:for="{{filteredPlans}}" wx:key="id" class="plan-card">
-      <view class="plan-title">{{item.title}}</view>
-      <view class="plan-meta">{{item.subject}} · {{item.grade}}</view>
+    <view wx:for="{{filteredPlans}}" wx:key="id" class="plan-card glass-card" hover-class="plan-card--active">
+      <view class="plan-content" bindtap="viewDetail" data-id="{{item.id}}">
+        <view class="plan-header">
+          <view class="plan-title">{{item.title}}</view>
+          <t-tag theme="primary" variant="light" size="small" shape="round">{{item.subject}}</t-tag>
+        </view>
+        <view class="plan-meta">
+          <view class="meta-item">
+            <t-icon name="layers" size="26rpx" color="#6366f1" />
+            <text>{{item.grade}}</text>
+          </view>
+          <view class="meta-item">
+            <t-icon name="time" size="26rpx" color="#a5b4fc" />
+            <text>{{item.created_at || '最近创建'}}</text>
+          </view>
+        </view>
+      </view>
+      
       <view class="plan-actions">
-        <button size="mini" bindtap="viewDetail" data-id="{{item.id}}">详情</button>
-        <button size="mini" bindtap="generatePPT" data-id="{{item.id}}">生成PPT</button>
-        <button size="mini" type="warn" bindtap="deletePlan" data-id="{{item.id}}">删除</button>
+        <view class="plan-action-btn" hover-class="plan-action-btn--active" bindtap="viewDetail" data-id="{{item.id}}">
+          <t-icon name="browse" size="36rpx" color="#6366f1" />
+        </view>
+        <view class="plan-action-btn" hover-class="plan-action-btn--active" bindtap="generatePPT" data-id="{{item.id}}">
+          <t-icon name="image" size="36rpx" color="#8b5cf6" />
+        </view>
+        <view class="plan-action-btn plan-action-btn--danger" hover-class="plan-action-btn--active" bindtap="deletePlan" data-id="{{item.id}}">
+          <t-icon name="delete" size="36rpx" color="#ef4444" />
+        </view>
       </view>
-    </view>
-
-    <view wx:if="{{filteredPlans.length === 0}}" class="empty">
-      暂无符合筛选条件的教案
     </view>
   </view>
 </view>

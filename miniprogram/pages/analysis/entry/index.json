@@ -1,7 +1,13 @@
 {
   "navigationBarTitleText": "学情分析",
+  "navigationStyle": "custom",
   "usingComponents": {
     "section-header": "/components/section-header/index",
-    "bottom-tab-bar": "/components/bottom-tab-bar/index"
+    "bottom-tab-bar": "/components/bottom-tab-bar/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

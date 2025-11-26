@@ -7,6 +7,7 @@ const questionTypes = [
   { label: '简答题', value: 'saq' }
 ]
 const difficulties = ['easy', 'medium', 'hard']
+const difficultyLabels = ['简单', '中等', '困难']
 
 Page({
   data: {
@@ -16,6 +17,7 @@ Page({
     questionTypes,
     typeIndex: 0,
     difficulties,
+    difficultyLabels,
     difficultyIndex: 1,
     questionCount: 5,
     loading: false
@@ -34,8 +36,16 @@ Page({
     ;(this as any).setData({ planIndex: Number(event.detail.value) })
   },
 
+  onTypeSelect(event: any) {
+    ;(this as any).setData({ typeIndex: Number(event.currentTarget.dataset.index) })
+  },
+
   onTypeChange(event: any) {
     ;(this as any).setData({ typeIndex: Number(event.detail.value) })
+  },
+
+  onDifficultySelect(event: any) {
+    ;(this as any).setData({ difficultyIndex: Number(event.currentTarget.dataset.index) })
   },
 
   onDifficultyChange(event: any) {

@@ -1,9 +1,56 @@
+<t-navbar 
+  title="教学大纲" 
+  left-arrow="{{true}}" 
+  fixed="{{true}}" 
+  class="custom-navbar"
+  bind:go-back="goBack"
+/>
+
 <view class="page">
-  <view class="section">
-    <section-header title="{{lessonPlan.title}}" description="{{lessonPlan.subject}} · {{lessonPlan.grade}}"></section-header>
-    <view class="outline">
-      <view wx:for="{{outlineParagraphs}}" wx:key="index" class="outline-item">
-        {{item}}
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+  </view>
+
+  <!-- 教案头部 -->
+  <view class="hero-section">
+    <view class="hero-bg"></view>
+    <view class="hero-content">
+      <view class="plan-badges">
+        <t-tag theme="light" variant="light" size="small">{{lessonPlan.subject}}</t-tag>
+        <t-tag theme="light" variant="light" size="small">{{lessonPlan.grade}}</t-tag>
+      </view>
+      <text class="plan-title">{{lessonPlan.title}}</text>
+    </view>
+  </view>
+
+  <!-- 大纲内容 -->
+  <view class="content-area">
+    <view class="outline-card">
+      <view class="card-header">
+        <view class="header-icon">
+          <t-icon name="format-vertical-align-left" size="40rpx" color="#667eea" />
+        </view>
+        <text class="header-title-text">教学步骤</text>
+        <text class="step-count">共 {{outlineParagraphs.length}} 步</text>
+      </view>
+
+      <view class="outline-list">
+        <view wx:for="{{outlineParagraphs}}" wx:key="index" class="outline-item">
+          <view class="step-indicator">
+            <view class="step-number">{{index + 1}}</view>
+            <view class="step-line" wx:if="{{index < outlineParagraphs.length - 1}}"></view>
+          </view>
+          <view class="step-content">
+            <text class="step-text">{{item}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{outlineParagraphs.length === 0}}" class="empty-state">
+        <t-icon name="file-unknown" size="100rpx" color="#cbd5e1" />
+        <text class="empty-text">暂无教学大纲</text>
       </view>
     </view>
   </view>

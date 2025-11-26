@@ -1,4 +1,11 @@
 {
   "navigationBarTitleText": "教案编辑",
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+  }
 }

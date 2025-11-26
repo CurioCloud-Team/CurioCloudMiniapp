@@ -1,4 +1,10 @@
 {
   "navigationBarTitleText": "找回密码",
-  "usingComponents": {}
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
+  }
 }

@@ -1,27 +1,97 @@
+<t-navbar title="登录" fixed="{{true}}" class="custom-navbar" />
+
 <view class="auth-page">
+  <!-- 装饰性背景元素 -->
+  <view class="bg-decoration">
+    <view class="blur-orb blur-orb-1"></view>
+    <view class="blur-orb blur-orb-2"></view>
+    <view class="blur-orb blur-orb-3"></view>
+  </view>
+
+  <!-- 顶部品牌区域 -->
   <view class="hero">
+    <view class="logo-container">
+      <view class="logo-glow"></view>
+      <view class="logo-icon">
+        <t-icon name="cloud" size="72rpx" color="#6366f1" />
+      </view>
+    </view>
     <text class="brand">CurioCloud</text>
     <text class="subtitle">AI 驱动的智慧备课助手</text>
   </view>
 
-  <view class="form-card">
-    <view class="form-title">欢迎回来</view>
-    <view class="form-description">请使用账号密码登录系统</view>
-
-    <view class="form-field">
-      <text class="label">用户名</text>
-      <input class="input" placeholder="输入用户名" value="{{username}}" data-field="username" bindinput="onInput" />
+  <!-- 登录卡片 - 毛玻璃效果 -->
+  <view class="form-card glass-card">
+    <view class="form-header">
+      <view class="form-title">欢迎回来</view>
+      <view class="form-description">请使用账号密码登录系统</view>
     </view>
 
-    <view class="form-field">
-      <text class="label">密码</text>
-      <input class="input" password placeholder="输入密码" value="{{password}}" data-field="password" bindinput="onInput" />
+    <view class="form-body">
+      <view class="form-field">
+        <view class="field-label">
+          <t-icon name="user" size="32rpx" color="#6366f1" />
+          <text>用户名</text>
+        </view>
+        <t-input 
+          class="glass-input"
+          placeholder="输入用户名" 
+          value="{{username}}" 
+          data-field="username" 
+          bind:change="onInput"
+          borderless
+        />
+      </view>
+
+      <view class="form-field">
+        <view class="field-label">
+          <t-icon name="lock-on" size="32rpx" color="#6366f1" />
+          <text>密码</text>
+        </view>
+        <t-input 
+          class="glass-input"
+          type="password"
+          placeholder="输入密码" 
+          value="{{password}}" 
+          data-field="password" 
+          bind:change="onInput"
+          borderless
+        />
+      </view>
     </view>
 
-    <view class="actions">
-      <button class="primary" bindtap="handleLogin" loading="{{loading}}">登录</button>
-      <button class="ghost" bindtap="gotoRegister">注册新账号</button>
-      <button class="link" bindtap="gotoForgot">忘记密码？</button>
+    <view class="form-actions">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        shape="round"
+        loading="{{loading}}"
+        bind:tap="handleLogin"
+        class="login-btn"
+      >
+        登录
+      </t-button>
+      
+      <t-button 
+        theme="light" 
+        size="large" 
+        block 
+        shape="round"
+        bind:tap="gotoRegister"
+        class="register-btn"
+      >
+        注册新账号
+      </t-button>
+      
+      <view class="forgot-link" bindtap="gotoForgot">
+        <text>忘记密码？</text>
+      </view>
     </view>
+  </view>
+
+  <!-- 底部装饰 -->
+  <view class="footer-text">
+    <text>安全登录 · 数据加密保护</text>
   </view>
 </view>
