@@ -1,6 +1,6 @@
 <t-navbar title="习题助手" fixed="{{true}}" class="custom-navbar" />
 
-<view class="page">
+<view class="page page-with-tabbar">
   <!-- 装饰背景 -->
   <view class="bg-decoration">
     <view class="orb orb-1"></view>

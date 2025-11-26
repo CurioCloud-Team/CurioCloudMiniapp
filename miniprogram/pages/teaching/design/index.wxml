@@ -9,7 +9,7 @@
   </view>
 </t-navbar>
 
-<view class="page">
+<view class="page page-with-tabbar">
   <!-- 装饰性背景 -->
   <view class="bg-decoration">
     <view class="blur-orb blur-orb-1"></view>

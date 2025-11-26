@@ -202,8 +202,13 @@ page {
 
 /* ===== 页面通用样式 ===== */
 .page {
-  padding: var(--spacing-lg);
   min-height: 100vh;
+}
+
+/* ===== 带 TabBar 的页面底部留白 ===== */
+/* 用于有 bottom-tab-bar 组件的页面，防止内容被遮挡 */
+.page-with-tabbar {
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
 }
 
 /* ===== 空状态 ===== */

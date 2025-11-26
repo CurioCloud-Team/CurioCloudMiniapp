@@ -2,7 +2,6 @@
   min-height: 100vh;
   background: linear-gradient(145deg, #f0f4ff 0%, #faf5ff 50%, #ecfdf5 100%);
   position: relative;
-  padding-bottom: calc(200rpx + env(safe-area-inset-bottom));
 }
 
 /* 自定义导航栏样式 */
@@ -90,7 +89,6 @@
 /* 英雄卡片 */
 .hero-card {
   position: relative;
-  margin: calc(env(safe-area-inset-top) + 96rpx) 0 0;
   padding: 80rpx 32rpx 48rpx;
   overflow: hidden;
 }
