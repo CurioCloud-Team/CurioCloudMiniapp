@@ -113,7 +113,6 @@
         bindtap="generate"
         class="generate-btn"
       >
-        <t-icon wx:if="{{!loading}}" name="add" size="40rpx" />
         生成习题
       </t-button>
     </view>

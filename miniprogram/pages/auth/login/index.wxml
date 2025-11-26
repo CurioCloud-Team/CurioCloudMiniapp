@@ -89,9 +89,4 @@
       </view>
     </view>
   </view>
-
-  <!-- 底部装饰 -->
-  <view class="footer-text">
-    <text>安全登录 · 数据加密保护</text>
-  </view>
 </view>

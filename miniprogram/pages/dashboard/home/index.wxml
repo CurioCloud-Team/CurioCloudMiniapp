@@ -33,7 +33,7 @@
       </view>
       <view class="stat-item">
         <view class="stat-icon-wrapper">
-          <t-icon name="image" size="36rpx" color="#8b5cf6" />
+          <t-icon name="file-powerpoint" size="36rpx" color="#8b5cf6" />
         </view>
         <view class="stat-info">
           <view class="stat-value">{{metrics.pptCount}}</view>

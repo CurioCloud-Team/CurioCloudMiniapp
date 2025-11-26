@@ -389,11 +389,12 @@
 }
 
 .back-btn-primary {
-  --td-button-primary-bg-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --td-button-primary-bg-color: #667eea;
   --td-button-primary-border-color: transparent;
   --td-button-border-radius: 24rpx;
   --td-button-large-height: 104rpx;
   --td-button-large-font-size: 32rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   border: none !important;
   box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
 }

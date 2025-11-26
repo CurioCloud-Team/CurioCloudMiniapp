@@ -224,7 +224,8 @@
 }
 
 .empty-btn {
-  --td-button-primary-bg-color: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --td-button-primary-bg-color: #6366f1;
   --td-button-primary-border-color: transparent;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
   box-shadow: 0 4rpx 16rpx rgba(99, 102, 241, 0.3);
 }

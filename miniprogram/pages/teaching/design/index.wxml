@@ -71,7 +71,7 @@
           <t-icon name="browse" size="36rpx" color="#6366f1" />
         </view>
         <view class="plan-action-btn" hover-class="plan-action-btn--active" bindtap="generatePPT" data-id="{{item.id}}">
-          <t-icon name="image" size="36rpx" color="#8b5cf6" />
+          <t-icon name="file-powerpoint" size="36rpx" color="#8b5cf6" />
         </view>
         <view class="plan-action-btn plan-action-btn--danger" hover-class="plan-action-btn--active" bindtap="deletePlan" data-id="{{item.id}}">
           <t-icon name="delete" size="36rpx" color="#ef4444" />

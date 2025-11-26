@@ -100,7 +100,6 @@
         bindtap="submit"
         class="submit-btn"
       >
-        <t-icon wx:if="{{!loading}}" name="chart-pie" size="36rpx" />
         生成分析报告
       </t-button>
 
