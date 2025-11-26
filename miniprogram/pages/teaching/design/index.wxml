@@ -18,15 +18,20 @@
 
   <!-- 筛选器 -->
   <view class="filter-bar glass-card">
-    <view class="filter-chip {{subjectIndex > 0 ? 'filter-chip--active' : ''}}" bindtap="showSubjectPicker">
-      <t-icon name="book" size="28rpx" />
-      <text>{{subjects[subjectIndex]}}</text>
-      <t-icon name="caret-down-small" size="28rpx" />
+    <view class="filter-options">
+      <view class="filter-chip {{subjectIndex > 0 ? 'filter-chip--active' : ''}}" bindtap="showSubjectPicker">
+        <t-icon name="book" size="28rpx" />
+        <text>{{subjects[subjectIndex]}}</text>
+        <t-icon name="caret-down-small" size="28rpx" />
+      </view>
+      <view class="filter-chip {{gradeIndex > 0 ? 'filter-chip--active' : ''}}" bindtap="showGradePicker">
+        <t-icon name="layers" size="28rpx" />
+        <text>{{grades[gradeIndex]}}</text>
+        <t-icon name="caret-down-small" size="28rpx" />
+      </view>
     </view>
-    <view class="filter-chip {{gradeIndex > 0 ? 'filter-chip--active' : ''}}" bindtap="showGradePicker">
-      <t-icon name="layers" size="28rpx" />
-      <text>{{grades[gradeIndex]}}</text>
-      <t-icon name="caret-down-small" size="28rpx" />
+    <view class="create-plan-icon-btn" hover-class="create-plan-icon-btn--active" bindtap="createPlan">
+      <t-icon name="add" size="40rpx" color="#fff" />
     </view>
   </view>
 

@@ -20,7 +20,7 @@
   "window": {
     "navigationBarTitleText": "CurioCloud",
     "navigationBarBackgroundColor": "#1f2937",
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
     "backgroundColor": "#f5f5f5"
   },
   "style": "v2",

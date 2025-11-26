@@ -95,6 +95,10 @@
       </view>
       <view class="empty-text">暂无教案</view>
       <view class="empty-hint">快去创建你的第一份教案吧～</view>
+      <t-button theme="primary" size="medium" shape="round" class="empty-btn" bind:tap="createPlan">
+        <t-icon name="add" size="32rpx" slot="icon" />
+        创建教案
+      </t-button>
     </view>
 
     <view 

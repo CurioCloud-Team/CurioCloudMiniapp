@@ -25,6 +25,7 @@
     0 8rpx 32rpx rgba(0, 0, 0, 0.1),
     0 2rpx 8rpx rgba(0, 0, 0, 0.06),
     inset 0 1rpx 0 rgba(255, 255, 255, 0.6) !important;
+  margin-bottom: 32rpx;
 }
 
 /* 激活状态的标签项增强效果 */

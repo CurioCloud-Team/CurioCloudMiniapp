@@ -41,6 +41,10 @@ Page({
     wx.navigateTo({ url })
   },
 
+  createPlan() {
+    wx.navigateTo({ url: '/pages/teaching/plan-editor/index' })
+  },
+
   openLesson(event: any) {
     const id = event.currentTarget.dataset.id
     wx.navigateTo({ url: `/pages/teaching/plan-detail/index?id=${id}` })
