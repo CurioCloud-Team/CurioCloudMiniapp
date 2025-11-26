@@ -1,6 +1,11 @@
 {
   "navigationBarTitleText": "PPT 生成状态",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "bottom-tab-bar": "/components/bottom-tab-bar/index"
+    "bottom-tab-bar": "/components/bottom-tab-bar/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

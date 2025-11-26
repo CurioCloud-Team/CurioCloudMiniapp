@@ -1,7 +1,86 @@
-<view class="page" wx:if="{{slides.length}}">
-  <view class="slide" wx:for="{{slides}}" wx:key="index">
-    <view class="slide-title">第 {{index + 1}} 页 · {{item.title || '未命名'}} </view>
-    <view class="slide-content">{{item.content || item.notes || '暂无内容'}}</view>
+<t-navbar 
+  title="PPT 预览" 
+  left-arrow="{{true}}" 
+  fixed="{{true}}" 
+  class="custom-navbar"
+  bind:go-back="goBack"
+>
+  <view slot="right" class="header-action">
+    <t-icon name="file-powerpoint" size="40rpx" color="#667eea" />
+  </view>
+</t-navbar>
+
+<view class="page">
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-area" wx:if="{{slides.length}}">
+    <!-- 统计信息 -->
+    <view class="stats-bar">
+      <view class="stat-chip">
+        <t-icon name="layers" size="32rpx" color="#667eea" />
+        <text>共 {{slides.length}} 页</text>
+      </view>
+    </view>
+
+    <!-- 幻灯片列表 -->
+    <view class="slides-list">
+      <view class="slide-card" wx:for="{{slides}}" wx:key="index">
+        <!-- 幻灯片头部 -->
+        <view class="slide-header">
+          <view class="slide-number">
+            <text>{{index + 1}}</text>
+          </view>
+          <view class="slide-title-area">
+            <text class="slide-title">{{item.title || '未命名幻灯片'}}</text>
+          </view>
+        </view>
+
+        <!-- 幻灯片内容预览 -->
+        <view class="slide-preview">
+          <view class="preview-content">
+            <text class="content-text">{{item.content || item.notes || '暂无内容'}}</text>
+          </view>
+        </view>
+
+        <!-- 备注区域 -->
+        <view class="slide-notes" wx:if="{{item.notes && item.content}}">
+          <view class="notes-header">
+            <t-icon name="chat" size="28rpx" color="#64748b" />
+            <text class="notes-label">演讲备注</text>
+          </view>
+          <text class="notes-text">{{item.notes}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:elif="{{loading}}" class="loading-state">
+    <view class="loading-card">
+      <t-loading theme="circular" size="80rpx" />
+      <text class="loading-text">正在加载 PPT 内容...</text>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-state">
+    <view class="empty-card">
+      <t-icon name="file-unknown" size="120rpx" color="#cbd5e1" />
+      <text class="empty-title">暂无内容</text>
+      <text class="empty-desc">PPT 内容为空或加载失败</text>
+      <t-button 
+        theme="primary" 
+        size="medium"
+        bindtap="fetchSlides"
+      >
+        重新加载
+      </t-button>
+    </view>
   </view>
 </view>
-<view wx:else class="empty">正在加载 PPT 内容...</view>
+

@@ -4,9 +4,15 @@ Page({
   data: {
     planId: 0,
     plan: {
+      title: '',
+      subject: '',
+      grade: '',
+      teaching_objective: '',
+      teaching_outline: '',
       activities: [] as any[]
     },
-    outlineParagraphs: [] as string[]
+    outlineParagraphs: [] as string[],
+    totalDuration: 0
   },
 
   async onLoad(options: Record<string, string>) {
@@ -16,11 +22,17 @@ Page({
     }
     const planId = Number(options.id)
     const plan = await teachingStore.fetchLessonPlan(planId)
+    const totalDuration = plan.activities?.reduce((sum: number, act: any) => sum + (act.duration || 0), 0) || 0
     ;(this as any).setData({
       planId,
       plan,
-      outlineParagraphs: plan.teaching_outline?.split('\n').filter(Boolean) || []
+      outlineParagraphs: plan.teaching_outline?.split('\n').filter(Boolean) || [],
+      totalDuration
     })
+  },
+
+  goBack() {
+    wx.navigateBack()
   },
 
   async generatePPT() {

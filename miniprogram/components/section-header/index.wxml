@@ -1,7 +1,13 @@
 <view class="section-header">
-  <view>
-    <view class="title">{{title}}</view>
-    <view wx:if="{{description}}" class="description">{{description}}</view>
+  <view class="header-content">
+    <!-- 装饰性指示条 -->
+    <view class="indicator"></view>
+    <view class="text-content">
+      <view class="title">{{title}}</view>
+      <view wx:if="{{description}}" class="description">{{description}}</view>
+    </view>
   </view>
-  <slot name="actions"></slot>
+  <view class="actions-slot">
+    <slot name="actions"></slot>
+  </view>
 </view>

@@ -1,12 +1,88 @@
-<view class="page">
-  <view class="section">
+<t-navbar 
+  title="PPT 生成状态" 
+  left-arrow="{{true}}" 
+  fixed="{{true}}" 
+  class="custom-navbar"
+  bind:go-back="goBack"
+/>
+
+<view class="page page-with-tabbar">
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+  </view>
+
+  <!-- 主要内容 -->
+  <view class="content-area">
+    <!-- 状态卡片 -->
     <view class="status-card">
-      <text class="title">项目 {{pptProjectId}}</text>
-      <text class="status">当前状态：{{statusLabel}}</text>
-      <button class="primary" bindtap="refresh" loading="{{loading}}">刷新状态</button>
-      <button class="ghost" bindtap="openViewer" wx:if="{{canPreview}}">查看内容</button>
+      <!-- 状态指示器 -->
+      <view class="status-indicator {{statusType}}">
+        <view class="indicator-ring" wx:if="{{statusType === 'processing'}}">
+          <t-loading theme="circular" size="80rpx" />
+        </view>
+        <view class="indicator-icon" wx:elif="{{statusType === 'completed'}}">
+          <t-icon name="check-circle-filled" size="100rpx" color="#10b981" />
+        </view>
+        <view class="indicator-icon" wx:elif="{{statusType === 'error'}}">
+          <t-icon name="close-circle-filled" size="100rpx" color="#ef4444" />
+        </view>
+        <view class="indicator-icon" wx:else>
+          <t-icon name="time-filled" size="100rpx" color="#f59e0b" />
+        </view>
+      </view>
+
+      <!-- 状态文本 -->
+      <view class="status-text">
+        <text class="status-title">{{statusTitle}}</text>
+        <text class="status-desc">{{statusDesc}}</text>
+      </view>
+
+      <!-- 项目信息 -->
+      <view class="project-info">
+        <view class="info-item">
+          <t-icon name="file-powerpoint" size="32rpx" color="#667eea" />
+          <text class="info-label">项目 ID</text>
+          <text class="info-value">{{pptProjectId}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="actions-card">
+      <t-button 
+        theme="default" 
+        size="large" 
+        block 
+        loading="{{loading}}"
+        bindtap="refresh"
+        class="refresh-btn"
+      >
+        <t-icon wx:if="{{!loading}}" name="refresh" size="36rpx" />
+        刷新状态
+      </t-button>
+
+      <t-button 
+        wx:if="{{canPreview}}"
+        theme="primary" 
+        size="large" 
+        block 
+        bindtap="openViewer"
+        class="preview-btn"
+      >
+        <t-icon name="browse" size="36rpx" />
+        查看内容
+      </t-button>
+    </view>
+
+    <!-- 提示信息 -->
+    <view class="tip-card" wx:if="{{statusType === 'processing'}}">
+      <t-icon name="info-circle" size="36rpx" color="#667eea" />
+      <text class="tip-text">PPT 生成需要一些时间，请耐心等待。您可以稍后回来查看。</text>
     </view>
   </view>
 </view>
 
 <bottom-tab-bar active="ppt"></bottom-tab-bar>
+

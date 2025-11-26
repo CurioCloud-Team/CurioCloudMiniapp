@@ -5,15 +5,30 @@
   bottom: 0;
   padding: 16rpx 32rpx 32rpx;
   padding-bottom: 32rpx;
-  padding-bottom: calc(32rpx + constant(safe-area-inset-bottom));
   padding-bottom: calc(32rpx + env(safe-area-inset-bottom));
-  background: rgba(248, 250, 252, 0.96);
-  backdrop-filter: blur(16rpx);
-  box-shadow: 0 -12rpx 32rpx rgba(15, 23, 42, 0.08);
   z-index: 999;
   box-sizing: border-box;
 }
 
+/* 毛玻璃/液态玻璃风格 TabBar */
 .bottom-tab-bar .t-tab-bar {
   --td-tab-bar-height: 96rpx;
+}
+
+/* 外部类样式 - 毛玻璃效果 */
+.glass-tab-bar {
+  backdrop-filter: saturate(180%) blur(40rpx) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(40rpx) !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1rpx solid rgba(255, 255, 255, 0.4) !important;
+  box-shadow: 
+    0 8rpx 32rpx rgba(0, 0, 0, 0.1),
+    0 2rpx 8rpx rgba(0, 0, 0, 0.06),
+    inset 0 1rpx 0 rgba(255, 255, 255, 0.6) !important;
+  margin-bottom: 32rpx;
+}
+
+/* 激活状态的标签项增强效果 */
+.bottom-tab-bar .t-tab-bar-item--active {
+  --td-tab-bar-active-bg: rgba(22, 119, 255, 0.15);
 }

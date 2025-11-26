@@ -9,7 +9,8 @@ Page({
 
   onInput(event: any) {
     const field = event.currentTarget.dataset.field
-  ;(this as any).setData({ [field]: event.detail.value })
+    const value = event.detail.value
+    ;(this as any).setData({ [field]: value })
   },
 
   async handleLogin() {
@@ -19,7 +20,7 @@ Page({
       return
     }
 
-  ;(this as any).setData({ loading: true })
+    ;(this as any).setData({ loading: true })
     try {
       await userStore.login({ username: this.data.username, password: this.data.password })
       wx.showToast({ title: '登录成功', icon: 'success' })
@@ -27,7 +28,7 @@ Page({
     } catch (error: any) {
       wx.showToast({ title: error?.message || '登录失败', icon: 'none' })
     } finally {
-  ;(this as any).setData({ loading: false })
+      ;(this as any).setData({ loading: false })
     }
   },
 

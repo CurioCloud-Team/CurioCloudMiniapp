@@ -1,11 +1,11 @@
 import { userStore } from '../../../store/userStore'
 
 const formFields = [
-  { field: 'username', label: '用户名', placeholder: '请输入用户名' },
-  { field: 'email', label: '邮箱', placeholder: '请输入邮箱' },
-  { field: 'full_name', label: '姓名', placeholder: '请输入真实姓名' },
-  { field: 'password', label: '密码', placeholder: '设置密码', password: true },
-  { field: 'confirm_password', label: '确认密码', placeholder: '再次输入密码', password: true }
+  { field: 'username', label: '用户名', placeholder: '请输入用户名', icon: 'user' },
+  { field: 'email', label: '邮箱', placeholder: '请输入邮箱', icon: 'mail' },
+  { field: 'full_name', label: '姓名', placeholder: '请输入真实姓名', icon: 'user-circle' },
+  { field: 'password', label: '密码', placeholder: '设置密码', password: true, icon: 'lock-on' },
+  { field: 'confirm_password', label: '确认密码', placeholder: '再次输入密码', password: true, icon: 'lock-on' }
 ]
 
 Page({
@@ -23,7 +23,8 @@ Page({
 
   onInput(event: any) {
     const field = event.currentTarget.dataset.field
-    ;(this as any).setData({ [`form.${field}`]: event.detail.value })
+    const value = event.detail.value
+    ;(this as any).setData({ [`form.${field}`]: value })
   },
 
   async handleSubmit() {

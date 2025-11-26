@@ -7,7 +7,8 @@ Page({
     questionCard: null as QuestionCard | null,
     sessionId: '',
     currentAnswer: '',
-    submitting: false
+    submitting: false,
+    scrollToView: ''
   },
 
   async onLoad() {
@@ -20,10 +21,11 @@ Page({
       sessionId: response.session_id,
       questionCard: response.question_card,
       messages: [
-        { type: 'ai', content: '我们将一起完成备课，请根据问题回答。' },
+        { type: 'ai', content: '👋 你好！我是你的 AI 备课助手，让我们一起完成备课吧！' },
         { type: 'ai', content: response.question_card.question }
       ]
     })
+    this.scrollToBottom()
   },
 
   chooseOption(event: any) {
@@ -32,7 +34,15 @@ Page({
   },
 
   onAnswerInput(event: any) {
-    ;(this as any).setData({ currentAnswer: event.detail.value })
+    const value = event.detail.value
+    ;(this as any).setData({ currentAnswer: value })
+  },
+
+  scrollToBottom() {
+    const len = this.data.messages.length
+    if (len > 0) {
+      ;(this as any).setData({ scrollToView: `msg-${len - 1}` })
+    }
   },
 
   async submitAnswer() {
@@ -43,6 +53,8 @@ Page({
     ;(this as any).setData({ submitting: true })
     const newMessages = [...this.data.messages, { type: 'user', content: this.data.currentAnswer }]
     ;(this as any).setData({ messages: newMessages })
+    this.scrollToBottom()
+    
     try {
       const response = await teachingStore.nextQuestion({
         session_id: this.data.sessionId,
@@ -52,13 +64,15 @@ Page({
       if (response.question_card) {
         updatedMessages.push({ type: 'ai', content: response.question_card.question })
       } else {
-        updatedMessages.push({ type: 'ai', content: '备课完成，教案已生成。' })
+        updatedMessages.push({ type: 'ai', content: '🎉 太棒了！备课完成，教案已生成。' })
       }
       ;(this as any).setData({
         messages: updatedMessages,
         questionCard: response.question_card ?? null,
         currentAnswer: ''
       })
+      this.scrollToBottom()
+      
       if (response.lesson_plan) {
         wx.showToast({ title: '生成成功', icon: 'success' })
         setTimeout(() => {

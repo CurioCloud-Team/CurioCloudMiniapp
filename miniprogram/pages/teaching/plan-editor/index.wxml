@@ -1,43 +1,277 @@
-<view class="page">
-  <view class="section">
-    <view class="form-field">
-      <text class="label">标题</text>
-      <input class="input" placeholder="如：函数图像导入课" value="{{form.title}}" data-field="title" bindinput="onInput" />
-    </view>
-
-    <view class="form-row">
-      <view class="form-field">
-        <text class="label">学科</text>
-        <input class="input" placeholder="数学" value="{{form.subject}}" data-field="subject" bindinput="onInput" />
-      </view>
-      <view class="form-field">
-        <text class="label">年级</text>
-        <input class="input" placeholder="高一" value="{{form.grade}}" data-field="grade" bindinput="onInput" />
-      </view>
-    </view>
-
-    <view class="form-field">
-      <text class="label">教学目标</text>
-      <textarea class="textarea" placeholder="描述教学目标" value="{{form.teaching_objective}}" data-field="teaching_objective" bindinput="onInput"></textarea>
-    </view>
-
-    <view class="form-field">
-      <text class="label">教学大纲</text>
-      <textarea class="textarea" placeholder="按行输入教学步骤" value="{{form.teaching_outline}}" data-field="teaching_outline" bindinput="onInput"></textarea>
-    </view>
-
-    <view class="activities-header">
-      <text>教学活动</text>
-      <button size="mini" bindtap="addActivity">添加</button>
-    </view>
-
-    <view wx:for="{{form.activities}}" wx:key="index" class="activity-card">
-      <input class="input" placeholder="活动名称" data-index="{{index}}" data-field="activity_name" value="{{item.activity_name}}" bindinput="onActivityInput" />
-      <textarea class="textarea" placeholder="活动描述" data-index="{{index}}" data-field="description" value="{{item.description}}" bindinput="onActivityInput"></textarea>
-      <input class="input" type="number" placeholder="时长（分钟）" data-index="{{index}}" data-field="duration" value="{{item.duration}}" bindinput="onActivityInput" />
-      <button size="mini" type="warn" data-index="{{index}}" bindtap="removeActivity">删除</button>
-    </view>
-
-    <button class="primary" bindtap="handleSubmit" loading="{{loading}}">保存教案</button>
+<t-navbar 
+  title="{{mode === 'edit' ? '编辑教案' : 'AI 备课助手'}}" 
+  left-arrow="{{true}}" 
+  fixed="{{true}}" 
+  class="custom-navbar"
+  bind:go-back="goBack"
+>
+  <view wx:if="{{mode === 'conversation'}}" slot="right" class="nav-avatar">
+    <t-icon name="service" size="40rpx" color="#667eea" />
   </view>
+</t-navbar>
+
+<view class="page">
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+  </view>
+
+  <!-- ========== 对话式新建模式 ========== -->
+  <block wx:if="{{mode === 'conversation'}}">
+    <!-- 加载中状态 -->
+    <view wx:if="{{loading && !sessionId}}" class="loading-container">
+      <t-loading theme="circular" size="80rpx" />
+      <text class="loading-text">正在初始化对话...</text>
+    </view>
+
+    <!-- 对话区域 -->
+    <scroll-view 
+      wx:else
+      scroll-y 
+      scroll-into-view="{{scrollToView}}" 
+      class="chat-container"
+    >
+      <view class="chat-messages">
+        <view 
+          wx:for="{{messages}}" 
+          wx:key="index" 
+          id="msg-{{index}}" 
+          class="message-wrapper {{item.type}}"
+        >
+          <view class="message-bubble glass-card">
+            <view wx:if="{{item.type === 'ai'}}" class="message-avatar">
+              <t-icon name="service" size="32rpx" color="#667eea" />
+            </view>
+            <view class="message-content">{{item.content}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 问答卡片 -->
+    <view wx:if="{{questionCard && !isCompleted}}" class="question-panel glass-card">
+      <view class="question-header">
+        <view class="question-icon">
+          <t-icon name="help-circle" size="40rpx" color="#667eea" />
+        </view>
+        <view class="question-title">请选择或输入您的答案</view>
+      </view>
+      
+      <!-- 选项按钮 -->
+      <view wx:if="{{questionCard.options.length}}" class="options-grid">
+        <view 
+          wx:for="{{questionCard.options}}" 
+          wx:key="index" 
+          class="option-btn {{currentAnswer === item ? 'option-btn--active' : ''}}"
+          hover-class="option-btn--hover"
+          data-value="{{item}}" 
+          bindtap="chooseOption"
+        >
+          {{item}}
+        </view>
+      </view>
+      
+      <!-- 自定义输入框 -->
+      <view wx:if="{{questionCard.allows_free_text}}" class="custom-input-area">
+        <view class="input-label">
+          <t-icon name="edit" size="28rpx" color="#64748b" />
+          <text>自定义回答</text>
+        </view>
+        <t-textarea 
+          placeholder="输入您的自定义答案（优先于选项）" 
+          value="{{customInput}}" 
+          bind:change="onCustomInput"
+          maxlength="500"
+          autosize
+          class="glass-textarea"
+        />
+      </view>
+      
+      <!-- 提交按钮 -->
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        shape="round"
+        loading="{{submitting}}"
+        disabled="{{!currentAnswer && !customInput}}"
+        bind:tap="submitAnswer"
+        class="submit-btn"
+      >
+        <t-icon name="send" size="32rpx" slot="icon" />
+        提交答案
+      </t-button>
+    </view>
+
+    <!-- 完成状态 -->
+    <view wx:if="{{isCompleted}}" class="completed-panel glass-card">
+      <view class="completed-icon">
+        <t-icon name="check-circle" size="80rpx" color="#10b981" />
+      </view>
+      <view class="completed-title">备课完成</view>
+      <view class="completed-desc">所有问题已回答，教案已生成</view>
+    </view>
+  </block>
+
+  <!-- ========== 编辑模式 ========== -->
+  <block wx:else>
+    <!-- 表单内容 -->
+    <view class="form-container">
+      <!-- 基本信息卡片 -->
+      <view class="form-card">
+        <view class="card-header">
+          <t-icon name="file-paste" size="40rpx" color="#667eea" />
+          <text class="card-title">基本信息</text>
+        </view>
+
+        <view class="form-field">
+          <text class="label">教案标题</text>
+          <t-input 
+            class="glass-input"
+            placeholder="如：函数图像导入课" 
+            value="{{form.title}}" 
+            data-field="title" 
+            bind:change="onInput"
+          />
+        </view>
+
+        <view class="form-row">
+          <view class="form-field flex-1">
+            <text class="label">学科</text>
+            <t-input 
+              class="glass-input"
+              placeholder="数学" 
+              value="{{form.subject}}" 
+              data-field="subject" 
+              bind:change="onInput"
+            />
+          </view>
+          <view class="form-field flex-1">
+            <text class="label">年级</text>
+            <t-input 
+              class="glass-input"
+              placeholder="高一" 
+              value="{{form.grade}}" 
+              data-field="grade" 
+              bind:change="onInput"
+            />
+          </view>
+        </view>
+      </view>
+
+      <!-- 教学内容卡片 -->
+      <view class="form-card">
+        <view class="card-header">
+          <t-icon name="lightbulb" size="40rpx" color="#f59e0b" />
+          <text class="card-title">教学内容</text>
+        </view>
+
+        <view class="form-field">
+          <text class="label">教学目标</text>
+          <t-textarea 
+            class="glass-textarea"
+            placeholder="描述本节课的教学目标..." 
+            value="{{form.teaching_objective}}" 
+            data-field="teaching_objective" 
+            bind:change="onInput"
+            autosize
+          />
+        </view>
+
+        <view class="form-field">
+          <text class="label">教学大纲</text>
+          <t-textarea 
+            class="glass-textarea"
+            placeholder="按行输入教学步骤..." 
+            value="{{form.teaching_outline}}" 
+            data-field="teaching_outline" 
+            bind:change="onInput"
+            autosize
+          />
+        </view>
+      </view>
+
+      <!-- 教学活动卡片 -->
+      <view class="form-card">
+        <view class="card-header">
+          <t-icon name="task" size="40rpx" color="#10b981" />
+          <text class="card-title">教学活动</text>
+          <view class="add-btn" bindtap="addActivity">
+            <t-icon name="add" size="32rpx" color="#667eea" />
+            <text>添加</text>
+          </view>
+        </view>
+
+        <view class="activities-list">
+          <view wx:for="{{form.activities}}" wx:key="index" class="activity-card">
+            <view class="activity-header">
+              <view class="activity-index">{{index + 1}}</view>
+              <view class="activity-actions">
+                <view class="delete-btn" data-index="{{index}}" bindtap="removeActivity">
+                  <t-icon name="delete" size="36rpx" color="#ef4444" />
+                </view>
+              </view>
+            </view>
+            
+            <view class="form-field">
+              <t-input 
+                class="glass-input"
+                placeholder="活动名称" 
+                data-index="{{index}}" 
+                data-field="activity_name" 
+                value="{{item.activity_name}}" 
+                bind:change="onActivityInput"
+              />
+            </view>
+            
+            <view class="form-field">
+              <t-textarea 
+                class="glass-textarea small"
+                placeholder="活动描述" 
+                data-index="{{index}}" 
+                data-field="description" 
+                value="{{item.description}}" 
+                bind:change="onActivityInput"
+                autosize
+              />
+            </view>
+            
+            <view class="duration-field">
+              <t-icon name="time" size="32rpx" color="#64748b" />
+              <t-input 
+                class="duration-input"
+                type="number" 
+                placeholder="时长" 
+                data-index="{{index}}" 
+                data-field="duration" 
+                value="{{item.duration}}" 
+                bind:change="onActivityInput"
+              />
+              <text class="duration-unit">分钟</text>
+            </view>
+          </view>
+
+          <view wx:if="{{form.activities.length === 0}}" class="empty-activities">
+            <t-icon name="add-circle" size="80rpx" color="#cbd5e1" />
+            <text>点击上方按钮添加教学活动</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部操作栏 -->
+    <view class="bottom-bar">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        loading="{{loading}}"
+        bindtap="handleSubmit"
+        class="submit-btn"
+      >
+        保存教案
+      </t-button>
+    </view>
+  </block>
 </view>

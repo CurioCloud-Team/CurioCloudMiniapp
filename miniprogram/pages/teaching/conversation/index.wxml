@@ -1,24 +1,103 @@
+<t-navbar 
+  title="AI 备课助手" 
+  left-arrow="{{true}}" 
+  fixed="{{true}}" 
+  class="custom-navbar"
+  bind:go-back="goLessonList"
+>
+  <view slot="right" class="nav-avatar">
+    <t-icon name="service" size="40rpx" color="#fff" />
+  </view>
+</t-navbar>
+
 <view class="page">
-  <view class="section">
-    <section-header title="AI 备课助手" description="根据提示回答问题，生成专属教案"></section-header>
-    <scroll-view scroll-y style="height: 60vh" class="chat-box">
-      <view wx:for="{{messages}}" wx:key="index" class="message {{item.type}}">
-        {{item.content}}
-      </view>
-    </scroll-view>
+  <!-- 装饰性背景 -->
+  <view class="bg-decoration">
+    <view class="blur-orb blur-orb-1"></view>
+    <view class="blur-orb blur-orb-2"></view>
+  </view>
 
-    <view wx:if="{{questionCard}}" class="question-card">
+  <!-- 对话区域 -->
+  <scroll-view scroll-y scroll-into-view="{{scrollToView}}" class="chat-container">
+    <view class="chat-messages">
+      <view wx:for="{{messages}}" wx:key="index" id="msg-{{index}}" class="message-wrapper {{item.type}}">
+        <view class="message-bubble glass-card">
+          <view wx:if="{{item.type === 'ai'}}" class="message-avatar">
+            <t-icon name="service" size="32rpx" color="#6366f1" />
+          </view>
+          <view class="message-content">{{item.content}}</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 问答卡片 -->
+  <view wx:if="{{questionCard}}" class="question-panel glass-card">
+    <view class="question-header">
+      <view class="question-icon">
+        <t-icon name="help-circle" size="40rpx" color="#6366f1" />
+      </view>
       <view class="question-title">{{questionCard.question}}</view>
-      <view class="options" wx:if="{{questionCard.options.length}}">
-        <button wx:for="{{questionCard.options}}" wx:key="index" class="option" data-value="{{item}}" bindtap="chooseOption">{{item}}</button>
+    </view>
+    
+    <!-- 选项按钮 -->
+    <view wx:if="{{questionCard.options.length}}" class="options-grid">
+      <view 
+        wx:for="{{questionCard.options}}" 
+        wx:key="index" 
+        class="option-btn {{currentAnswer === item ? 'option-btn--active' : ''}}"
+        hover-class="option-btn--hover"
+        data-value="{{item}}" 
+        bindtap="chooseOption"
+      >
+        {{item}}
       </view>
-      <textarea wx:if="{{questionCard.allows_free_text}}" class="answer-input" placeholder="补充说明" value="{{currentAnswer}}" bindinput="onAnswerInput"></textarea>
-      <button class="primary" bindtap="submitAnswer" loading="{{submitting}}">提交答案</button>
     </view>
+    
+    <!-- 自由输入 -->
+    <view wx:if="{{questionCard.allows_free_text}}" class="answer-textarea">
+      <t-textarea 
+        placeholder="补充说明（可选）" 
+        value="{{currentAnswer}}" 
+        bind:change="onAnswerInput"
+        maxlength="500"
+        autosize
+        class="glass-textarea"
+      />
+    </view>
+    
+    <!-- 提交按钮 -->
+    <t-button 
+      theme="primary" 
+      size="large" 
+      block 
+      shape="round"
+      loading="{{submitting}}"
+      disabled="{{!currentAnswer}}"
+      bind:tap="submitAnswer"
+      class="submit-btn"
+    >
+      <t-icon name="send" size="32rpx" slot="icon" />
+      提交答案
+    </t-button>
+  </view>
 
-    <view wx:else class="completed">
-      <text>所有问题已回答，生成的教案可在列表中查看。</text>
-      <button class="primary" bindtap="goLessonList">查看教案</button>
+  <!-- 完成状态 -->
+  <view wx:else class="completed-panel glass-card">
+    <view class="completed-icon">
+      <t-icon name="check-circle" size="80rpx" color="#10b981" />
     </view>
+    <view class="completed-title">备课完成</view>
+    <view class="completed-desc">所有问题已回答，教案已生成</view>
+    <t-button 
+      theme="primary" 
+      size="large" 
+      shape="round"
+      bind:tap="goLessonList"
+      class="view-btn"
+    >
+      <t-icon name="file-paste" size="32rpx" slot="icon" />
+      查看教案
+    </t-button>
   </view>
 </view>

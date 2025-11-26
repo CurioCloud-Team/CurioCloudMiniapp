@@ -1,6 +1,11 @@
 {
   "navigationBarTitleText": "教案详情",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "section-header": "/components/section-header/index"
+    "section-header": "/components/section-header/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

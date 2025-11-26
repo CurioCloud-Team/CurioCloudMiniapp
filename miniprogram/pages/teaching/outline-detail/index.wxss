@@ -1,11 +1,226 @@
 .page {
+  min-height: 100vh;
+  background: linear-gradient(145deg, #f0f4ff 0%, #faf5ff 50%, #ecfdf5 100%);
+  position: relative;
+}
+
+/* 自定义导航栏样式 */
+.custom-navbar {
+  --td-navbar-bg-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --td-navbar-title-font-size: 34rpx;
+  --td-navbar-title-color: #fff;
+  --td-navbar-left-arrow-color: #fff;
+}
+
+/* 装饰背景 */
+.bg-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60rpx);
+  opacity: 0.4;
+}
+
+.orb-1 {
+  width: 400rpx;
+  height: 400rpx;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  top: -100rpx;
+  right: -100rpx;
+  animation: float1 8s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 300rpx;
+  height: 300rpx;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  bottom: 100rpx;
+  left: -80rpx;
+  animation: float2 10s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-30rpx, 30rpx) scale(1.1); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(20rpx, -20rpx) scale(1.05); }
+}
+
+/* 英雄区域 */
+.hero-section {
+  position: relative;
+  margin: calc(env(safe-area-inset-top) + 96rpx) 0 0;
+  padding: 60rpx 32rpx 40rpx;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 0 0 48rpx 48rpx;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.plan-badges {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.plan-badges .t-tag {
+  --td-tag-light-bg-color: rgba(255, 255, 255, 0.2);
+  --td-tag-light-color: #fff;
+}
+
+.plan-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+/* 内容区域 */
+.content-area {
+  position: relative;
+  z-index: 1;
+  padding: 24rpx 32rpx 48rpx;
+  margin-top: -16rpx;
+}
+
+/* 大纲卡片 */
+.outline-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20rpx);
+  border-radius: 32rpx;
   padding: 32rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8rpx 32rpx rgba(102, 126, 234, 0.1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 32rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid rgba(148, 163, 184, 0.2);
+}
+
+.header-icon {
+  width: 64rpx;
+  height: 64rpx;
+  background: rgba(102, 126, 234, 0.15);
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title-text {
+  flex: 1;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.step-count {
+  font-size: 24rpx;
+  color: #64748b;
+  background: rgba(100, 116, 139, 0.1);
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+/* 大纲列表 */
+.outline-list {
+  display: flex;
+  flex-direction: column;
 }
 
 .outline-item {
-  padding: 24rpx;
-  margin-bottom: 16rpx;
-  background: #fff;
+  display: flex;
+  gap: 20rpx;
+}
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 56rpx;
+}
+
+.step-number {
+  width: 56rpx;
+  height: 56rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.step-line {
+  width: 3rpx;
+  flex: 1;
+  background: linear-gradient(to bottom, #667eea, rgba(102, 126, 234, 0.1));
+  margin: 12rpx 0;
+  border-radius: 2rpx;
+  min-height: 40rpx;
+}
+
+.step-content {
+  flex: 1;
+  padding-bottom: 28rpx;
+}
+
+.step-text {
+  font-size: 30rpx;
+  color: #334155;
+  line-height: 1.7;
+  display: block;
+  padding: 16rpx 24rpx;
+  background: rgba(102, 126, 234, 0.06);
   border-radius: 20rpx;
-  line-height: 1.6;
+  border-left: 4rpx solid #667eea;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+  gap: 20rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #94a3b8;
 }

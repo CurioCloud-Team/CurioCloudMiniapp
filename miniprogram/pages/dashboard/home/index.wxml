@@ -1,37 +1,131 @@
-<view class="dashboard">
-  <view class="welcome section">
-    <section-header title="你好，{{userProfile.full_name || userProfile.username}}" description="这里是你的智慧备课工作台"></section-header>
-    <view class="stats">
-      <view class="stat-card">
-        <text class="stat-value">{{metrics.lessonCount}}</text>
-        <text class="stat-label">教案</text>
+<t-navbar title="CurioCloud" fixed="{{true}}" class="custom-navbar" />
+
+<view class="dashboard page-with-tabbar">
+  <!-- 装饰性背景 -->
+  <view class="bg-decoration">
+    <view class="blur-orb blur-orb-1"></view>
+    <view class="blur-orb blur-orb-2"></view>
+  </view>
+
+  <!-- 顶部欢迎区域 -->
+  <view class="welcome-header glass-card">
+    <view class="welcome-content">
+      <view class="avatar-wrapper">
+        <view class="avatar-glow"></view>
+        <t-avatar size="large" icon="user" class="user-avatar" />
       </view>
-      <view class="stat-card">
-        <text class="stat-value">{{metrics.pptCount}}</text>
-        <text class="stat-label">PPT 项目</text>
+      <view class="welcome-text">
+        <view class="greeting">你好，{{userProfile.full_name || userProfile.username}} 👋</view>
+        <view class="subtitle">这里是你的智慧备课工作台</view>
       </view>
-      <view class="stat-card">
-        <text class="stat-value">{{metrics.exerciseCount}}</text>
-        <text class="stat-label">习题集</text>
+    </view>
+    
+    <!-- 数据统计 -->
+    <view class="stats-grid">
+      <view class="stat-item">
+        <view class="stat-icon-wrapper">
+          <t-icon name="file-paste" size="36rpx" color="#6366f1" />
+        </view>
+        <view class="stat-info">
+          <view class="stat-value">{{metrics.lessonCount}}</view>
+          <view class="stat-label">教案</view>
+        </view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-icon-wrapper">
+          <t-icon name="file-powerpoint" size="36rpx" color="#8b5cf6" />
+        </view>
+        <view class="stat-info">
+          <view class="stat-value">{{metrics.pptCount}}</view>
+          <view class="stat-label">PPT</view>
+        </view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-icon-wrapper">
+          <t-icon name="assignment" size="36rpx" color="#a855f7" />
+        </view>
+        <view class="stat-info">
+          <view class="stat-value">{{metrics.exerciseCount}}</view>
+          <view class="stat-label">习题</view>
+        </view>
       </view>
     </view>
   </view>
 
-  <view class="section">
+  <!-- 功能导航区域 -->
+  <view class="section-wrapper">
     <section-header title="功能导航" description="选择模块快速开始"></section-header>
-    <feature-card title="教学设计" description="创建或查看教案" data-url="/pages/teaching/design/index" bindtap="navigateTo"></feature-card>
-    <feature-card title="备课对话" description="AI 引导式备课" data-url="/pages/teaching/conversation/index" bindtap="navigateTo"></feature-card>
-    <feature-card title="习题助手" description="生成针对性的练习" data-url="/pages/exercise/assistant/index" bindtap="navigateTo"></feature-card>
-    <feature-card title="学情分析" description="上传成绩，生成洞察" data-url="/pages/analysis/entry/index" bindtap="navigateTo"></feature-card>
+    <feature-card 
+      title="教学设计" 
+      description="创建或查看教案" 
+      icon="book"
+      data-url="/pages/teaching/design/index" 
+      bindtap="navigateTo"
+    />
+    <feature-card 
+      title="备课对话" 
+      description="AI 引导式备课" 
+      icon="chat"
+      data-url="/pages/teaching/conversation/index" 
+      bindtap="navigateTo"
+    />
+    <feature-card 
+      title="习题助手" 
+      description="生成针对性的练习" 
+      icon="assignment"
+      data-url="/pages/exercise/assistant/index" 
+      bindtap="navigateTo"
+    />
+    <feature-card 
+      title="学情分析" 
+      description="上传成绩，生成洞察" 
+      icon="chart-bar"
+      data-url="/pages/analysis/entry/index" 
+      bindtap="navigateTo"
+    />
   </view>
 
-  <view class="section">
-    <section-header title="最近教案" description="最近更新的 3 个教案"></section-header>
-    <view wx:if="{{lessonPlans.length === 0}}" class="empty">暂无教案，快去创建吧～</view>
-    <view wx:for="{{lessonPlans}}" wx:key="id" class="lesson-card" bindtap="openLesson" data-id="{{item.id}}">
-      <view class="lesson-title">{{item.title}}</view>
-      <view class="lesson-meta">{{item.subject}} · {{item.grade}}</view>
-      <view class="lesson-date">{{item.created_at}}</view>
+  <!-- 最近教案区域 -->
+  <view class="section-wrapper">
+    <section-header title="最近教案" description="最近更新的教案"></section-header>
+    
+    <view wx:if="{{lessonPlans.length === 0}}" class="empty-state glass-card">
+      <view class="empty-icon">
+        <t-icon name="file-add" size="80rpx" color="#a5b4fc" />
+      </view>
+      <view class="empty-text">暂无教案</view>
+      <view class="empty-hint">快去创建你的第一份教案吧～</view>
+      <t-button theme="primary" size="medium" shape="round" class="empty-btn" bind:tap="createPlan">
+        <t-icon name="add" size="32rpx" slot="icon" />
+        创建教案
+      </t-button>
+    </view>
+
+    <view 
+      wx:for="{{lessonPlans}}" 
+      wx:key="id" 
+      class="lesson-card glass-card" 
+      hover-class="lesson-card--active"
+      bindtap="openLesson" 
+      data-id="{{item.id}}"
+    >
+      <view class="lesson-header">
+        <view class="lesson-title">{{item.title}}</view>
+        <t-tag theme="primary" variant="light" size="small">{{item.subject}}</t-tag>
+      </view>
+      <view class="lesson-meta">
+        <view class="meta-item">
+          <t-icon name="layers" size="28rpx" color="#6366f1" />
+          <text>{{item.grade}}</text>
+        </view>
+        <view class="meta-item">
+          <t-icon name="time" size="28rpx" color="#a5b4fc" />
+          <text>{{item.created_at}}</text>
+        </view>
+      </view>
+      <view class="lesson-arrow">
+        <t-icon name="chevron-right" size="36rpx" color="#a5b4fc" />
+      </view>
     </view>
   </view>
 </view>

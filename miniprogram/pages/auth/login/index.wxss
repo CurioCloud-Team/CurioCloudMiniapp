@@ -1,82 +1,240 @@
-.auth-page {
-  min-height: 100vh;
-  padding: 80rpx 48rpx;
-  background: linear-gradient(180deg, #eef2ff, #ffffff 40%);
+/* 自定义导航栏样式 */
+.custom-navbar {
+  --td-navbar-bg-color: transparent;
+  --td-navbar-title-font-size: 34rpx;
+  --td-navbar-title-color: #1e1b4b;
 }
 
+.auth-page {
+  min-height: 100vh;
+  padding: 0 48rpx;
+  padding-top: calc(env(safe-area-inset-top) + 24rpx);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ===== 装饰性背景 ===== */
+.bg-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blur-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80rpx);
+}
+
+.blur-orb-1 {
+  width: 500rpx;
+  height: 500rpx;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(139, 92, 246, 0.3) 100%);
+  top: -150rpx;
+  right: -150rpx;
+  animation: float 8s ease-in-out infinite;
+}
+
+.blur-orb-2 {
+  width: 400rpx;
+  height: 400rpx;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.25) 0%, rgba(139, 92, 246, 0.2) 100%);
+  bottom: 100rpx;
+  left: -120rpx;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.blur-orb-3 {
+  width: 300rpx;
+  height: 300rpx;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(99, 102, 241, 0.2) 100%);
+  top: 40%;
+  right: -80rpx;
+  animation: float 12s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30rpx) scale(1.05); }
+}
+
+/* ===== 品牌区域 ===== */
 .hero {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 48rpx;
 }
 
+.logo-container {
+  position: relative;
+  margin-bottom: 24rpx;
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160rpx;
+  height: 160rpx;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(20rpx);
+}
+
+.logo-icon {
+  position: relative;
+  width: 120rpx;
+  height: 120rpx;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+  border-radius: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 8rpx 32rpx rgba(99, 102, 241, 0.2),
+    inset 0 2rpx 4rpx rgba(255, 255, 255, 0.8);
+}
+
 .brand {
-  font-size: 48rpx;
-  font-weight: 700;
+  font-size: 56rpx;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 2rpx;
 }
 
 .subtitle {
-  display: block;
+  font-size: 28rpx;
+  color: #6366f1;
   margin-top: 12rpx;
-  color: #64748b;
+  opacity: 0.8;
 }
 
-.form-card {
-  background: #ffffff;
-  border-radius: 32rpx;
+/* ===== 表单卡片 - 毛玻璃 ===== */
+.form-card.glass-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(40rpx);
+  -webkit-backdrop-filter: blur(40rpx);
+  border-radius: 40rpx;
   padding: 48rpx 40rpx;
-  box-shadow: 0 24rpx 48rpx rgba(15, 23, 42, 0.08);
+  border: 2rpx solid rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 16rpx 48rpx rgba(99, 102, 241, 0.12),
+    inset 0 2rpx 4rpx rgba(255, 255, 255, 0.9);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 40rpx;
 }
 
 .form-title {
-  font-size: 36rpx;
-  font-weight: 600;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1e1b4b;
 }
 
 .form-description {
-  color: #94a3b8;
+  color: #6366f1;
   margin-top: 8rpx;
+  font-size: 28rpx;
+  opacity: 0.75;
+}
+
+/* ===== 表单字段 ===== */
+.form-body {
   margin-bottom: 32rpx;
 }
 
 .form-field {
-  margin-bottom: 32rpx;
+  margin-bottom: 28rpx;
 }
 
-.label {
-  display: block;
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  font-size: 28rpx;
+  color: #4338ca;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.glass-input {
+  --td-input-vertical-padding: 28rpx;
+  --td-input-bg-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16rpx);
+  -webkit-backdrop-filter: blur(16rpx);
+  border-radius: 20rpx;
+  border: 2rpx solid rgba(99, 102, 241, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus-within {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 4rpx rgba(99, 102, 241, 0.1);
+}
+
+/* ===== 按钮样式 ===== */
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.login-btn {
+  --td-button-primary-bg-color: #6366f1;
+  --td-button-primary-border-color: transparent;
+  --td-button-large-height: 96rpx;
+  --td-button-large-font-size: 32rpx;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  box-shadow: 0 8rpx 24rpx rgba(99, 102, 241, 0.35);
+}
+
+.register-btn {
+  --td-button-light-bg-color: rgba(255, 255, 255, 0.5);
+  --td-button-light-color: #6366f1;
+  --td-button-light-border-color: rgba(99, 102, 241, 0.3);
+  --td-button-large-height: 96rpx;
+  backdrop-filter: blur(16rpx);
+  -webkit-backdrop-filter: blur(16rpx);
+}
+
+.forgot-link {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #6366f1;
+  font-size: 28rpx;
+  opacity: 0.75;
+}
+
+.forgot-link:active {
+  opacity: 1;
+}
+
+/* ===== 底部装饰 ===== */
+.footer-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 48rpx;
+  color: #a5b4fc;
   font-size: 24rpx;
-  color: #475569;
-  margin-bottom: 12rpx;
-}
-
-.input {
-  width: 100%;
-  padding: 24rpx;
-  border-radius: 20rpx;
-  background: #f8fafc;
-}
-
-.actions button {
-  margin-top: 16rpx;
-}
-
-.primary {
-  width: 100%;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: #ffffff;
-  border-radius: 20rpx;
-  padding: 24rpx 0;
-}
-
-.ghost {
-  width: 100%;
-  border: 2rpx solid #cbd5f5;
-  color: #1d4ed8;
-  border-radius: 20rpx;
-  padding: 24rpx 0;
-}
-
-.link {
-  width: 100%;
-  background: transparent;
-  color: #64748b;
 }

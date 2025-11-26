@@ -1,5 +1,28 @@
 @import "../login/index.wxss";
 
 .form-field {
-  margin-bottom: 28rpx;
+  margin-bottom: 24rpx;
+}
+
+/* 登录链接样式 */
+.login-link {
+  text-align: center;
+  padding: 20rpx 0;
+  color: #64748b;
+  font-size: 28rpx;
+}
+
+.login-link .link-text {
+  color: #6366f1;
+  font-weight: 500;
+  margin-left: 8rpx;
+}
+
+.submit-btn {
+  --td-button-primary-bg-color: #6366f1;
+  --td-button-primary-border-color: transparent;
+  --td-button-large-height: 96rpx;
+  --td-button-large-font-size: 32rpx;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  box-shadow: 0 8rpx 24rpx rgba(99, 102, 241, 0.35);
 }

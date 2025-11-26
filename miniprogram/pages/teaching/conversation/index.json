@@ -1,6 +1,12 @@
 {
   "navigationBarTitleText": "AI 备课助手",
+  "navigationStyle": "custom",
   "usingComponents": {
-    "section-header": "/components/section-header/index"
+    "section-header": "/components/section-header/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-textarea": "tdesign-miniprogram/textarea/textarea",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

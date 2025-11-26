@@ -1,34 +1,123 @@
-<view class="page">
-  <view class="section">
-    <section-header title="智能习题生成" description="选择教案与题型"><view /></section-header>
-    <view class="form-field">
-      <text class="label">关联教案</text>
-      <picker mode="selector" range="{{planTitles}}" value="{{planIndex}}" bindchange="onPlanChange">
-        <view class="picker">{{planTitles[planIndex]}}</view>
-      </picker>
+<t-navbar title="习题助手" fixed="{{true}}" class="custom-navbar" />
+
+<view class="page page-with-tabbar">
+  <!-- 装饰背景 -->
+  <view class="bg-decoration">
+    <view class="orb orb-1"></view>
+    <view class="orb orb-2"></view>
+    <view class="orb orb-3"></view>
+  </view>
+
+  <!-- 主要内容 -->
+  <view class="content-area">
+    <!-- 顶部提示卡片 -->
+    <view class="tip-card">
+      <view class="tip-icon">
+        <t-icon name="lightbulb" size="48rpx" color="#f59e0b" />
+      </view>
+      <view class="tip-content">
+        <text class="tip-title">智能习题生成</text>
+        <text class="tip-desc">选择教案与参数，AI 将为您生成针对性习题</text>
+      </view>
     </view>
 
-    <view class="form-field">
-      <text class="label">题型</text>
-      <picker mode="selector" range="{{questionTypes}}" value="{{typeIndex}}" bindchange="onTypeChange">
-        <view class="picker">{{questionTypes[typeIndex].label}}</view>
-      </picker>
+    <!-- 表单卡片 -->
+    <view class="form-card">
+      <!-- 关联教案 -->
+      <view class="form-field">
+        <view class="field-header">
+          <t-icon name="file-paste" size="36rpx" color="#667eea" />
+          <text class="label">关联教案</text>
+        </view>
+        <picker mode="selector" range="{{planTitles}}" value="{{planIndex}}" bindchange="onPlanChange">
+          <view class="picker-trigger">
+            <text class="picker-value">{{planTitles[planIndex]}}</text>
+            <t-icon name="chevron-down" size="36rpx" color="#94a3b8" />
+          </view>
+        </picker>
+      </view>
+
+      <!-- 题型 -->
+      <view class="form-field">
+        <view class="field-header">
+          <t-icon name="bulletpoint" size="36rpx" color="#10b981" />
+          <text class="label">题型选择</text>
+        </view>
+        <view class="type-options">
+          <view 
+            wx:for="{{questionTypes}}" 
+            wx:key="value" 
+            class="type-option {{typeIndex === index ? 'active' : ''}}"
+            data-index="{{index}}"
+            bindtap="onTypeSelect"
+          >
+            <t-icon name="{{index === 0 ? 'check-circle' : (index === 1 ? 'edit-2' : 'chat')}}" size="36rpx" />
+            <text>{{item.label}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 难度 -->
+      <view class="form-field">
+        <view class="field-header">
+          <t-icon name="chart-bar" size="36rpx" color="#f59e0b" />
+          <text class="label">难度等级</text>
+        </view>
+        <view class="difficulty-options">
+          <view 
+            wx:for="{{difficultyLabels}}" 
+            wx:key="index"
+            class="difficulty-option {{difficultyIndex === index ? 'active' : ''}} level-{{index}}"
+            data-index="{{index}}"
+            bindtap="onDifficultySelect"
+          >
+            <view class="difficulty-dots">
+              <view class="dot {{index >= 0 ? 'filled' : ''}}"></view>
+              <view class="dot {{index >= 1 ? 'filled' : ''}}"></view>
+              <view class="dot {{index >= 2 ? 'filled' : ''}}"></view>
+            </view>
+            <text>{{item}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 数量滑块 -->
+      <view class="form-field">
+        <view class="field-header">
+          <t-icon name="queue" size="36rpx" color="#8b5cf6" />
+          <text class="label">题目数量</text>
+          <text class="count-badge">{{questionCount}} 题</text>
+        </view>
+        <view class="slider-container">
+          <text class="slider-min">3</text>
+          <t-slider 
+            class="custom-slider"
+            min="{{3}}" 
+            max="{{20}}" 
+            step="{{1}}" 
+            value="{{questionCount}}" 
+            bind:change="onCountChange"
+          />
+          <text class="slider-max">20</text>
+        </view>
+      </view>
     </view>
 
-    <view class="form-field">
-      <text class="label">难度</text>
-      <picker mode="selector" range="{{difficulties}}" value="{{difficultyIndex}}" bindchange="onDifficultyChange">
-        <view class="picker">{{difficulties[difficultyIndex]}}</view>
-      </picker>
+    <!-- 生成按钮 -->
+    <view class="action-area">
+      <t-button 
+        theme="primary" 
+        size="large" 
+        block 
+        loading="{{loading}}"
+        bindtap="generate"
+        class="generate-btn"
+      >
+        生成习题
+      </t-button>
     </view>
-
-    <view class="form-field">
-      <text class="label">题目数量: {{questionCount}}</text>
-      <slider min="3" max="20" step="1" value="{{questionCount}}" bindchange="onCountChange"></slider>
-    </view>
-
-    <button class="primary" bindtap="generate" loading="{{loading}}">生成习题</button>
   </view>
 </view>
 
 <bottom-tab-bar active="exercise"></bottom-tab-bar>
+

@@ -2,17 +2,49 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 24rpx;
+  margin-bottom: 28rpx;
+  padding: 8rpx 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* 装饰性指示条 - 渐变效果 */
+.indicator {
+  width: 8rpx;
+  height: 48rpx;
+  background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%);
+  border-radius: 4rpx;
+  margin-right: 16rpx;
+  margin-top: 6rpx;
+  box-shadow: 0 4rpx 12rpx rgba(99, 102, 241, 0.3);
+}
+
+.text-content {
+  flex: 1;
 }
 
 .title {
-  font-size: 32rpx;
+  font-size: 36rpx;
   font-weight: 700;
-  color: #0f172a;
+  color: #1e1b4b;
+  line-height: 1.3;
+  letter-spacing: 1rpx;
 }
 
 .description {
   margin-top: 8rpx;
-  color: #64748b;
-  font-size: 24rpx;
+  color: #6366f1;
+  font-size: 26rpx;
+  opacity: 0.75;
+  line-height: 1.4;
+}
+
+.actions-slot {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
 }

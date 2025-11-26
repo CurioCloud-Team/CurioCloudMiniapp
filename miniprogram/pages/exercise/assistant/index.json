@@ -1,7 +1,12 @@
 {
   "navigationBarTitleText": "习题助手",
+  "navigationStyle": "custom",
   "usingComponents": {
     "section-header": "/components/section-header/index",
-    "bottom-tab-bar": "/components/bottom-tab-bar/index"
+    "bottom-tab-bar": "/components/bottom-tab-bar/index",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-icon": "tdesign-miniprogram/icon/icon",
+    "t-slider": "tdesign-miniprogram/slider/slider",
+    "t-navbar": "tdesign-miniprogram/navbar/navbar"
   }
 }

@@ -5,6 +5,8 @@
     shape="round"
     split="{{false}}"
     bordered="{{false}}"
+    t-class="glass-tab-bar"
+    style="--td-tab-bar-bg-color: rgba(255, 255, 255, 0.6); --td-tab-bar-round-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);"
     bind:change="onChange"
   >
     <t-tab-bar-item
