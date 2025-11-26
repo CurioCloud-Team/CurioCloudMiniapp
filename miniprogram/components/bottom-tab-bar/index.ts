@@ -44,7 +44,8 @@ const normalizeRoute = (route: string) => route.replace(/^\//, '')
 
 Component({
   options: {
-    addGlobalClass: true
+    addGlobalClass: true,
+    styleIsolation: 'shared'
   },
   properties: {
     active: {
